@@ -1,6 +1,8 @@
 ### Theoretical Framework, TICA time-lagged independent component analysis  
 
-From a *Molecular Dynamics* simulation we obtain a set of points $\left\{ \vec {x}(t_i), \vec {p}(t_i) \right\} _{i=1,N}$ which define a trajectory in the Phase Space $\Omega$ of the system, where $N$ is the total number of simulation steps.  
+<!-- <img src="https://render.githubusercontent.com/render/math?math="> for math formulas -->
+
+From a *Molecular Dynamics* simulation we obtain a set of points <img src="https://render.githubusercontent.com/render/math?math=\left\{ \vec {x}(t_i), \vec {p}(t_i) \right\} _{i=1,N}"> $\left\{ \vec {x}(t_i), \vec {p}(t_i) \right\} _{i=1,N}$ which define a trajectory in the Phase Space $\Omega$ of the system, where N is the total number of simulation steps.  
 These points are distributed according to a certain probability distribution $p_t(\vec x)$. If the simulation is sufficiently long and the system is ergodic then (in the canonical ensemble NPT) $p(\vec x) = \dfrac{e^{-\beta U(\vec x)}}{Z}$ is the Boltzmann one. Strictly speaking we can say that during the simulation the distribution probability evolves in time and the stationary distribution $\mu (\vec x)$ is the Boltzmann distribution: $\lim_{\tau \rightarrow \infty} p_{t+\tau}(\vec x)  = \mu (\vec x)$  
 
 #### Transfer operator
