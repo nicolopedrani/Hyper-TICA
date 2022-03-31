@@ -2,11 +2,14 @@ import numpy as np
 import pandas as pd
 import torch
 torch.manual_seed(21)
+import matplotlib.pyplot as plt
 
 from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader
 from torch.utils.data import Subset,random_split
 from mlcvs.utils.io import load_dataframe
 from mlcvs.tica import DeepTICA_CV
+
+from scipy.optimize import curve_fit
 
 #-- fitting time auto-correlation function --#
 def f(x,l):
@@ -103,33 +106,39 @@ def training(temp,path,train_parameters):
 
     return model,data,logweight,X
 
-#takes the orthogonal component of v in respect of w, with boltzmann product
-def make_orthogonal(modelv,modelw,X,j=0,k=1,logweight=None):
-    return modelv-boltzmann_product(modelv,modelw,X,j=j,k=k,logweight=logweight)/boltzmann_product(modelw,modelw,X,j=k,k=k,logweight=logweight)*modelw
+def fit_timeacorr(descriptors_names,data,axs=None):
 
-#the boltzmann scalar product is the integral on the boltzmann sampling X of the product of two functions f and g
-def boltzmann_product(model0,model1,X,j=0,k=1,logweight=None):
+    if axs is None:
+        fig,axs = plt.subplots(1,2,figsize=(14,5))#,sharey=True)
 
-    if logweight is not None:
-        weights= np.exp(logweight)
-    else:
-        weights=np.ones(X.shape[0])
+    #-- unit of step --#
+    last=10
+    x = np.linspace(0,last+1,last)
+    acorr = np.empty(last)
+    corr_length = np.empty(len(descriptors_names))
+    k=0
 
-    i,sumtot,sumcv1,sumcv2=0,0,0,0
-    for elem in X:
-        el = torch.Tensor(elem)
-        a = model0(el)[j]
-        b = model1(el)[k]
-        sumtot+=a*b*weights[i]
-        sumcv1+=a*a*weights[i]
-        sumcv2+=b*b*weights[i]
-        i+=1
-        
-    sumtot/=i
-    sumcv1/=i
-    sumcv2/=i
-    sumtot=sumtot.detach().cpu().numpy()
-    sumcv1=sumcv1.detach().cpu().numpy()
-    sumcv2=sumcv2.detach().cpu().numpy()
+    for desc in descriptors_names:
+        print("autocorrelation for ", desc)
+        for i in range(last):
+            acorr[i] = data[desc].autocorr(i)
+        p_opt,p_cov = curve_fit(f,x[:last],acorr[:last],maxfev=2000)
+        corr_length[k] = p_opt[0]
+        f_fit = f(x[0:last],p_opt[0])
+        axs[0].plot(x,acorr)
+        axs[0].plot(x,f_fit)
+        k+=1
+
+    axs[0].legend([r"$e^{-\frac{\tau}{\xi}}$"])
     
-    return sumtot/np.sqrt(sumcv1*sumcv2)
+    c_length = pd.DataFrame(descriptors_names,columns=["descriptors"])
+    c_length["cor_len"] = corr_length
+    c_length.plot(kind="bar",x="descriptors",y="cor_len",rot=35,ax=axs[1],fontsize=15,label=r"$\xi$")
+
+    axs[0].set_xlabel(r'$\tau$')
+    axs[0].set_title(r'$C(\tau)$')
+    axs[1].set_title(r'$\xi=$ from $e^{-\frac{\tau}{\xi}}$')
+    plt.tight_layout()
+
+    plt.show()
+
