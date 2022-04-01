@@ -20,7 +20,7 @@ Then it is clear that <img src="https://render.githubusercontent.com/render/math
 ### Linear approximation and TICA
 How can we guess the <img src="https://render.githubusercontent.com/render/math?math=\psi_i(\vec x)"> ? 
 To answer this question we first recall what TICA does:   
-It uses a linear transformation to map an original order parameters $d_j(\vec x)$ set to a new set of order parameters $\psi_i(\vec x)$, the *Independent component*. <img src="https://render.githubusercontent.com/render/math?math=\psi_i(\vec x)"> must fullfill two properties:  
+It uses a linear transformation to map an original order parameters <img src="https://render.githubusercontent.com/render/math?math=d_j(\vec x)"> set to a new set of order parameters <img src="https://render.githubusercontent.com/render/math?math=\psi_i(\vec x)">, the *Independent component*. <img src="https://render.githubusercontent.com/render/math?math=\psi_i(\vec x)"> must fullfill two properties:  
 1.  they are uncorrelated. This means that <img src="https://render.githubusercontent.com/render/math?math=\langle \psi_i(\vec x_t) \psi_j(\vec x_{t} \rangle = \delta_{i,j}">
 2.  Their autocovariances at a fixed lag time <img src="https://render.githubusercontent.com/render/math?math=\tau"> are maximal  
 If <img src="https://render.githubusercontent.com/render/math?math=\psi_i(\vec x)"> are the <img src="https://render.githubusercontent.com/render/math?math=\mathcal{T}(\tau)"> eigenfunctions, then <img src="https://render.githubusercontent.com/render/math?math=\langle \psi_i(\vec x_t) \psi_i(\vec x_{t\oplus\tau}) \rangle = \lambda_i">  
