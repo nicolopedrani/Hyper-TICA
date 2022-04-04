@@ -1,0 +1,11 @@
+gio 24 mar 2022, 16:13:33, CET
+gromacs for 25000000 steps
+./run_gromacs.sh: line 43: .//home/npedrani@iit.local/Desktop/ALANINA/script/bck.meup.sh: No such file or directory
+./run_gromacs.sh: line 44: .//home/npedrani@iit.local/Desktop/ALANINA/script/bck.meup.sh: No such file or directory
+
+time mpirun -np 1 /home/npedrani@iit.local/programs/gromacs-2020.6/install/bin/gmx_mpi mdrun -s input.sA.tpr -deffnm alanine -plumed plumed.dat -ntomp 2 -nsteps 25000000 -pin off &>> alanine.out
+
+real	240m43,189s
+user	478m33,463s
+sys	1m43,467s
+gio 24 mar 2022, 20:14:17, CET
