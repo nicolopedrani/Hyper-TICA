@@ -6,6 +6,7 @@ date
 ncore=1
 tprfile=input.sA.tpr
 gmx=`which gmx_mpi`
+script=/home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/Alanine/script/bck.meup.sh
 
 ### optional ###
 nsteps=$[500*1000*100] #last is ns
@@ -35,8 +36,8 @@ mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
 submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
 
 ### execute ###
-../script/./bck.meup.sh -i $outfile
-../script/./bck.meup.sh -i ${filename}* > $outfile
+bash ${script} -i $outfile
+bash ${script} -i ${filename}* > $outfile
 echo -e "\n$submit &>> $outfile"
 eval "$submit &>> $outfile"
 [ -z "$extra_cmd" ] || eval $extra_cmd

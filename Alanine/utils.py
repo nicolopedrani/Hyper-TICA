@@ -3,6 +3,7 @@ import pandas as pd
 import torch
 torch.manual_seed(21)
 import matplotlib.pyplot as plt
+from scipy.interpolate import griddata
 
 from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader
 from torch.utils.data import Subset,random_split
@@ -176,35 +177,48 @@ def plot_model_lossfunction(model):
 
     plt.tight_layout()
 
-#-- da cambiare per alanina --#
-def plot_cvs_isolines(model,limits,points=150,n_out=2,scatter=None,axs=None):
+def plot_cvs_isolines(model,limits=((-np.pi,np.pi),(-np.pi,np.pi)),interval=50,scatter=None,path="angles/COLVAR"):
 
-    #-- prepare grid --#
-    xx,yy = np.meshgrid(np.linspace(limits[0][0],limits[0][1],points),np.linspace(limits[1][0],limits[1][1],points))
-    grid = np.transpose(np.array([xx.reshape(points*points),yy.reshape(points*points)]))
+        complete_data = load_dataframe(path)
+        search_values="^d[^a-z]"
+        X_complete = complete_data.filter(regex=search_values).values
+        x = complete_data["phi"].to_numpy()[::interval] 
+        y = complete_data["psi"].to_numpy()[::interval] 
 
-    #-- evaluate cvs on the grid --#
-    cvs = []
-    for i in range(n_out):
-        cvs.append(np.transpose(model(torch.Tensor(grid)).detach().cpu().numpy())[i].reshape(points,points))
+        fig,axs = plt.subplots(1,2,figsize=(14,8))
 
-    #-- plotting --#
-    if axs is None:
-        fig,axs = plt.subplots(1,n_out,figsize=(12,6))
+        for k,ax in enumerate(axs):
+                
+                #-- evaluate cvs --#
+                z = np.transpose(model(torch.Tensor(X_complete)).detach().numpy())[k][::interval] 
+                #-- define grid --#
+                npts = len(z)
+                xi = np.linspace(limits[0][0],limits[0][1],int(npts/2.))
+                yi = np.linspace(limits[1][0],limits[1][1],int(npts/2.))
+                #-- grid the data --#
+                zi = griddata((x, y), z, (xi[None,:], yi[:,None]), method='nearest')
+                #-- bounds to plot isolines --#
+                bounds = np.arange(np.min(zi), np.max(zi), 0.1)
+                cmap = plt.cm.get_cmap('fessa',len(bounds))
+                colors = list(cmap(np.arange(len(bounds))))
+                cmap = mpl.colors.ListedColormap(colors[:-1], "")
+                #-- plot --#
+                CS = ax.contourf(xi,yi,zi,cmap=cmap,shading='auto',alpha=1,zorder=-1,
+                norm = mpl.colors.BoundaryNorm(bounds, ncolors=len(bounds)-1, clip=False) )
+                fig.colorbar(CS, ax=ax)
+                if scatter is not None:
+                        ax.scatter(scatter["phi"],scatter["psi"],s=2,c='white',alpha=0.8,zorder=-1,label="scatter")
+                CS = ax.contour(xi,yi,zi,shading='auto',alpha=1,zorder=-1,linewidths=3)
+                ax.clabel(CS,inline=True,fmt='%1.1f',fontsize=10)
+                ax.set_xlim(limits[0][0],limits[0][1])
+                ax.set_ylim(limits[1][0],limits[1][1])
+                ax.legend()
+                ax.set_xlabel(r"$\phi$")
+                ax.set_ylabel(r"$\psi$")
+                ax.set_title('Deep TICA '+str(k+1))
 
-    for k,ax in enumerate(axs):
-        cset = ax.contourf(xx,yy,cvs[k],linewidths=1,cmap="fessa")
-        cset = ax.contour(xx,yy,cvs[k],linewidths=3,cmap="gray",linestyles="dashed")
-        ax.clabel(cset,inline=True,fmt='%1.1f',fontsize=15)
-        ax.set_xlabel("p.x")
-        ax.set_ylabel("p.y")
-        ax.set_title('Deep-TICA '+str(k+1))
-        if scatter is not None:
-            ax.scatter(scatter[:,0],scatter[:,1],s=2,c='white',alpha=0.8)
-            ax.set_aspect('equal')
-        
-    plt.tight_layout()
-    plt.show()
+        plt.tight_layout()
+        plt.show()
 
 def Boltzmann_product(model0,model1,X,j=0,k=1,logweight=None,normed=False):
 
