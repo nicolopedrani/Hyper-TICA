@@ -3,6 +3,7 @@ import pandas as pd
 import torch
 torch.manual_seed(21)
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from scipy.interpolate import griddata
 
 from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader
