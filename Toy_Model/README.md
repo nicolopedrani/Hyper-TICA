@@ -30,3 +30,6 @@ With this approximation the problem of finding <img src="https://render.githubus
 where <img src="https://render.githubusercontent.com/render/math?math=C_{ij}^d(\tau) = \langle d_i(\vec x_t) d_j(\vec x_{t\oplus\tau})  \rangle"> and <img src="https://render.githubusercontent.com/render/math?math=C_{ij}^d(0) = \langle d_i(\vec x_t) d_j(\vec x_{t})  \rangle">
   
 Condition 1. requires that there is not overlap between <img src="https://render.githubusercontent.com/render/math?math=\lambda_i"> and <img src="https://render.githubusercontent.com/render/math?math=\lambda_j">, and that <img src="https://render.githubusercontent.com/render/math?math=C^d(\tau)"> is symmetric. Obviously this condition it is not satisfied from the data, which are obtained from an finite simulation, so we must enforce this condition.  
+
+# Deep-TICA  
+<img src="../images/DeepTICA_scheme.png">
