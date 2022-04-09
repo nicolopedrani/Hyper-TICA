@@ -237,18 +237,20 @@ def orthogonal_cv(model,X,logweight=None,j=0,k=1):
 
 #-- My Autocorrelation --#
 def my_autocorrelation(x,lag,weight=None):
+    
     autocorr = np.empty(0)
     N = len(x)
     if weight is None:
         weight = np.ones(N)
+    
     Nw = np.sum(weight)
-    x = x.reshape(N)
     mean = np.average(x,weights=weight)
     variance = np.cov(x,aweights=weight)
-    #variance = np.var(x[:])
-    #mean = np.mean(x[:])   
-    sum = 0
-    for i in range(N-lag):
-        sum += (x[i]-mean)*(x[i+lag]-mean)
-    autocorr = np.append(autocorr,sum/(Nw*variance))
+      
+    b = x[lag::]
+    a = x[:(N-lag)]
+    w = weight[:(N-lag)]
+
+    autocorr =  np.sum( np.multiply( np.multiply( (a-mean), (b-mean) ), w ) ) / (Nw*variance) 
+    
     return autocorr
