@@ -13,6 +13,19 @@ from mlcvs.tica import DeepTICA_CV
 
 from scipy.optimize import curve_fit
 
+#-- to run process from jupyter --#
+import subprocess
+import os
+from pathlib import Path
+# execute bash command in the given folder
+def execute(command, folder, background=False, print_result=True):
+    cmd = subprocess.run(command, cwd=folder, shell=True, capture_output = True, text=True, close_fds=background)
+    if cmd.returncode == 0:
+        if print_result:
+            print(f'Completed: {command}')
+    else:
+        print(cmd.stderr)
+
 #-- fitting time auto-correlation function --#
 def f(x,l):
     return np.exp(-x/l)
@@ -250,3 +263,89 @@ def orthogonal_cv(model,X,logweight=None,j=0,k=1):
     c = b - prod_ab/(prod_aa) * a
 
     return c
+
+def create_time_lagged_dataset_cpp(input_file,path="./"):
+
+    #-- remove old files --#
+    execute("rm w_lag.txt w_t.txt x_lag.txt x_t.txt",folder=path, print_result=False)
+
+    #-- run create_time_lagged_dataset.exe --#
+    execute("./create_time_lagged_dataset.exe "+input_file,folder=path, print_result=False)
+
+    #--load data with pandas, much faster than numpy --#
+    cpp_xt = torch.Tensor(pd.read_csv(path+"x_t.txt",delimiter="\t",dtype=float,header=None).to_numpy())
+    cpp_xlag = torch.Tensor(pd.read_csv(path+"x_lag.txt",delimiter="\t",dtype=float,header=None).to_numpy())
+    cpp_wt = torch.Tensor( np.transpose( pd.read_csv(path+"w_t.txt",delimiter="\t",dtype=float,header=None).to_numpy() )[0] )
+    cpp_wlag = torch.Tensor( np.transpose( pd.read_csv(path+"w_lag.txt",delimiter="\t",dtype=float,header=None).to_numpy() )[0] )
+
+    #-- create TensorDataset for training --#
+    data = cpp_xt,cpp_xlag,cpp_wt,cpp_wlag
+    dataset = torch.utils.data.TensorDataset(*data)
+
+    return dataset
+
+#-- My Autocorrelation --#
+# one descriptor at once 
+def my_autocorrelation_python(x,lag,weight=None,time=None):
+   
+    N = len(x)
+    if weight is None:
+        weight = np.ones(N)
+    if time is None:
+        time = np.arange(0,N)
+
+    data = create_time_lagged_dataset(x, t = time, lag_time = lag, logweights = np.log(weight))
+    x_t,x_lag,w_t,w_lag = np.array(data[:][0]),np.array(data[:][1]),np.array(data[:][2]),np.array(data[:][3])
+    Nw = np.sum(w_t)
+    mean = np.average(x_t,weights=w_t)
+    variance = np.cov(x_t,aweights=w_t)
+    autocorr = np.sum( np.multiply( np.multiply( (x_t-mean), (x_lag-mean) ), w_lag ) ) / (Nw*variance)
+
+    return autocorr
+
+#-- index tells me which is the descriptor to analyze --#
+#-- one descriptor at once --#
+def my_autocorrelation_cpp(inputFile,lag,index,path="./",weight=True):
+    
+    #-- modify lag time in input file --#
+    execute("sed -i 's/lag.*/lag = "+str(lag)+"/g' "+inputFile,folder=path, print_result=False)
+
+    #-- modify if_weight in input file --#
+    if not weight:
+        execute("sed -i 's/if_weights.*/if_weights = 0/g' "+inputFile,folder=path, print_result=False)
+    else:
+        execute("sed -i 's/if_weights.*/if_weights = 1/g' "+inputFile,folder=path, print_result=False)
+
+    #-- ricordo che i weights vengono moltiplicati per beta dentro la funzione cpp --#
+    data = create_time_lagged_dataset_cpp(inputFile,path=path)
+    x_t,x_lag,w_t,w_lag = np.array(data[:][0]).T[index],np.array(data[:][1]).T[index],np.array(data[:][2]),np.array(data[:][3])
+    Nw = np.sum(w_t)
+    mean = np.average(x_t,weights=w_t)
+    variance = np.cov(x_t,aweights=w_t)
+    autocorr = np.sum( np.multiply( np.multiply( (x_t-mean), (x_lag-mean) ), w_lag ) ) / (Nw*variance)
+
+    return autocorr
+
+#-- all descriptors --#
+def my_autocorrelation_cpp_all(inputFile,lag,path="./",weight=True):
+    
+    #-- modify lag time in input file --#
+    execute("sed -i 's/lag.*/lag = "+str(lag)+"/g' "+inputFile,folder=path, print_result=False)
+
+    #-- modify if_weight in input file --#
+    if not weight:
+        execute("sed -i 's/if_weights.*/if_weights = 0/g' "+inputFile,folder=path, print_result=False)
+    else:
+        execute("sed -i 's/if_weights.*/if_weights = 1/g' "+inputFile,folder=path, print_result=False)
+
+    #-- ricordo che i weights vengono moltiplicati per beta dentro la funzione cpp --#
+    data = create_time_lagged_dataset_cpp(inputFile,path=path)
+    x_t,x_lag,w_t,w_lag = np.array(data[:][0]),np.array(data[:][1]),np.array(data[:][2]),np.array(data[:][3])
+    Nw = np.sum(w_t)
+    mean = np.array([ np.average(x_t.T[i],weights=w_t) for i in range(x_t.shape[1]) ])
+    variance = np.array([ np.cov(x_t.T[i],aweights=w_t) for i in range(x_t.shape[1]) ])
+    autocorr = np.array([np.sum( np.multiply(np.multiply((x_t.T[i]-mean[i]),(x_lag.T[i]-mean[i])),w_lag))/(Nw*variance[i]) for i in range(x_t.shape[1])])
+    
+    return autocorr
+
+
