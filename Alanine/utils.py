@@ -3,6 +3,8 @@ import pandas as pd
 import torch
 torch.manual_seed(21)
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+plt.rcParams.update({'font.size': 15})
 import matplotlib as mpl
 from scipy.interpolate import griddata
 
@@ -10,6 +12,7 @@ from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader
 from torch.utils.data import Subset,random_split
 from mlcvs.utils.io import load_dataframe
 from mlcvs.tica import DeepTICA_CV
+from mlcvs.utils.fes import compute_fes
 
 from scipy.optimize import curve_fit
 
@@ -263,6 +266,100 @@ def orthogonal_cv(model,X,logweight=None,j=0,k=1):
     c = b - prod_ab/(prod_aa) * a
 
     return c
+
+#-- Fes plot with 1D and 2D estimation --#
+def gridspec_fes(s,logweight,sim_parameters):
+    fig = plt.figure(figsize=(10,10))
+    gs = GridSpec(4, 4)#, figure=fig)
+
+    ax_scatter = fig.add_subplot(gs[1:4,0:3])
+    ax_hist_x = fig.add_subplot(gs[0,:3])
+    ax_hist_y = fig.add_subplot(gs[1:,3])
+
+    #-- 2D plot --#
+    fes,grid,bounds,error = compute_fes(s, weights=np.exp(logweight),
+                                        temp=sim_parameters["temp"],
+                                        kbt=sim_parameters["kbt"],
+                                        blocks=sim_parameters["blocks"],
+                                        bandwidth=sim_parameters["bandwidth"],scale_by='range')
+                                        #,plot=True, plot_max_fes=sim_parameters["plot_max_fes"], ax = ax_scatter)
+    bounds = np.arange(0, 60, 5.)
+    cmap = plt.cm.get_cmap('fessa',len(bounds))
+    colors = list(cmap(np.arange(len(bounds))))
+    cmap = mpl.colors.ListedColormap(colors[:-1], "")
+    # set over-color to last color of list 
+    cmap.set_over("white")
+    c = ax_scatter.pcolormesh(grid[0], grid[1], fes, cmap=cmap,shading='auto',alpha=1,
+        norm = mpl.colors.BoundaryNorm(bounds, ncolors=len(bounds)-1, clip=False), label="FES [Kj/mol]"
+    )
+    c = ax_scatter.contourf(grid[0], grid[1], fes, bounds , cmap=cmap,shading='auto',alpha=1, linewidth=10,
+        norm = mpl.colors.BoundaryNorm(bounds, ncolors=len(bounds)-1, clip=False), label="FES [Kj/mol]",
+    )
+    #fig.colorbar(c, ax=ax_scatter,label="FES [KbT]")
+    c = ax_scatter.contour(grid[0], grid[1], fes, bounds, linewidths=3,cmap="gray",linestyles="dashed",
+        norm = mpl.colors.BoundaryNorm(bounds, ncolors=len(bounds)-1, clip=False), label="FES [Kj/mol]",
+    )
+    ax_scatter.legend(["FES [Kj/mol]"])
+    c.clabel()
+    ax_scatter.grid()
+    ax_scatter.set_xlabel(r"$\phi$")
+    ax_scatter.set_ylabel(r"$\psi$")
+    #np.savetxt(folder+"fes.txt",fes,delimiter=" ")
+    #np.savetxt(folder+"grid0.txt",grid[0],delimiter=" ")
+    #np.savetxt(folder+"grid1.txt",grid[1],delimiter=" ")
+
+    #-- 1D plot --#
+    fes,grid,bounds,error = compute_fes(s[:,0], weights=np.exp(logweight),
+                                        temp=sim_parameters["temp"],
+                                        kbt=sim_parameters["kbt"],
+                                        blocks=sim_parameters["blocks"],
+                                        bandwidth=sim_parameters["bandwidth"],scale_by='range')
+    ax_hist_x.errorbar(grid,fes,yerr=error)
+    ax_hist_x.set_ylabel("FES [Kj/mol]")
+    ax_hist_x.grid()
+                                        #,plot=True, plot_max_fes=sim_parameters["plot_max_fes"], ax = ax_hist_y)
+    fes,grid,bounds,error = compute_fes(s[:,1], weights=np.exp(logweight),
+                                        temp=sim_parameters["temp"],
+                                        kbt=sim_parameters["kbt"],
+                                        blocks=sim_parameters["blocks"],
+                                        bandwidth=sim_parameters["bandwidth"],scale_by='range')
+                                        #,plot=True, plot_max_fes=sim_parameters["plot_max_fes"], ax = ax_hist_x)
+    ax_hist_y.errorbar(fes,grid,xerr=error)
+    ax_hist_y.set_xlabel("FES [Kj/mol]")
+    ax_hist_y.grid()
+
+    plt.tight_layout()
+    plt.show()
+    
+#-- Unbias Autocorrelation --#
+# this implementation is the same as *autocorr* method in pandas
+# but with this I can choose if either normalize the result or not
+def my_autocorrelation_pandaslike(x,lag,normed=True):
+    
+    mean = np.average(x,weights=None)
+    variance = np.cov(x,aweights=None)
+    N = len(x)
+      
+    x_lag = x[lag::]
+    x_0 = x[:(N-lag)]
+
+    if normed:
+        autocorr =  np.sum( np.multiply( (x_0-mean), (x_lag-mean) ) ) / ( (N-lag) * variance ) 
+    else:
+        autocorr = np.sum( np.multiply( x_0, x_lag )) / (N-lag)
+    
+    return autocorr
+
+#-- Velocity Autocorrelation --#
+def my_autocorrelation_velocity(v,lag):
+
+    N = len(v)
+    v_lag = v[lag::]
+    v_0 = v[:(N-lag)]
+
+    autocorr = sum ([ np.dot(v_0[i],v_lag[i]) for i in range(N-lag)] ) / (N-lag)
+    
+    return autocorr
 
 def create_time_lagged_dataset_cpp(input_file,path="./"):
 
