@@ -7,7 +7,7 @@ from matplotlib.gridspec import GridSpec
 plt.rcParams.update({'font.size': 15})
 import matplotlib as mpl
 
-from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader
+from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader, tprime_evaluation
 from torch.utils.data import Subset,random_split
 from mlcvs.utils.io import load_dataframe
 from mlcvs.tica import DeepTICA_CV
@@ -31,30 +31,6 @@ def execute(command, folder, background=False, print_result=True):
 #-- fitting time auto-correlation function --#
 def f(x,l):
     return np.exp(-x/l)
-
-def tprime_evaluation(X,t=None,logweights=None):
-
-    # define time if not given
-    if t is None:
-        t = np.arange(0,len(X))
-
-    # rescale time with log-weights if given
-    if logweights is not None:
-        # compute time increment in simulation time t
-        dt = np.round(t[1]-t[0],3)
-        # sanitize logweights
-        logweights = torch.Tensor(logweights)
-        logweights -= torch.max(logweights)
-        lognorm = torch.logsumexp(logweights,0)
-        logweights /= lognorm
-        # compute instantaneus time increment in rescaled time t'
-        d_tprime = torch.exp(logweights)*dt
-        # calculate cumulative time t'
-        tprime = torch.cumsum(d_tprime,0)
-    else:
-        tprime = t
-
-    return tprime
 
 def train_deeptica_load(temp=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True):
     
