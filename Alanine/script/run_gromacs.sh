@@ -33,7 +33,8 @@ fi
 ### commands ###
 #mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh"
 mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
-submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
+submit="time mpirun -np $ncore ${mpi_cmd} -pin on -pinoffset 2 -pinstride 1"
+#submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
 
 ### execute ###
 bash ${script} -i $outfile
