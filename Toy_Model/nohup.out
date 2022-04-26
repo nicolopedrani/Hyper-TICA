@@ -1,0 +1,450 @@
+training with seed:  338
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.013      -0.014      0.005  0.002  
+INFO: Early stopping
+117   -0.008      -0.009      0.006  0.002  
+training with seed:  74
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.025      -0.024      0.006  0.002  
+INFO: Early stopping
+106   -0.056      -0.055      0.006  0.002  
+training with seed:  2790
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.044      -0.044      0.005  0.002  
+INFO: Early stopping
+118   -0.034      -0.033      0.006  0.002  
+training with seed:  866
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.002       0.001       0.006  -0.009 
+INFO: Early stopping
+102   0.002       0.002       0.006  -0.009 
+training with seed:  153
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.010      -0.009      0.006  0.003  
+INFO: Early stopping
+103   -0.009      -0.008      0.006  0.003  
+training with seed:  748
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.014      -0.012      0.007  0.002  
+INFO: Early stopping
+101   -0.015      -0.012      0.007  0.002  
+training with seed:  4026
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.109      -0.105      0.005  -0.000 
+INFO: Early stopping
+105   -0.012      -0.007      0.006  0.001  
+training with seed:  922
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.009      -0.009      0.005  0.003  
+INFO: Early stopping
+103   -0.012      -0.013      0.005  0.003  
+training with seed:  1986
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.008      -0.012      0.006  0.001  
+INFO: Early stopping
+101   -0.008      -0.012      0.006  0.001  
+training with seed:  1462
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.008      -0.009      0.005  0.002  
+INFO: Early stopping
+106   -0.012      -0.015      0.005  0.002  
+training with seed:  2277
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.014      -0.010      0.006  0.003  
+INFO: Early stopping
+114   -0.013      -0.009      0.006  0.004  
+training with seed:  4045
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.009      -0.009      0.006  0.002  
+INFO: Early stopping
+104   -0.008      -0.009      0.006  0.002  
+training with seed:  1865
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.002       0.003       0.006  -0.008 
+INFO: Early stopping
+102   0.002       0.003       0.006  -0.008 
+training with seed:  4939
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.009      -0.009      0.006  0.002  
+INFO: Early stopping
+105   -0.009      -0.009      0.006  0.002  
+training with seed:  3892
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.001       0.004       0.007  -0.009 
+INFO: Early stopping
+101   0.001       0.004       0.007  -0.009 
+training with seed:  3232
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.008      -0.009      0.006  0.001  
+INFO: Early stopping
+111   -0.008      -0.009      0.006  0.001  
+training with seed:  2963
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.069      -0.066      0.006  0.002  
+INFO: Early stopping
+101   -0.068      -0.065      0.006  0.002  
+training with seed:  1427
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.009      -0.007      0.007  0.002  
+INFO: Early stopping
+103   -0.011      -0.008      0.007  0.002  
+training with seed:  1013
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.082      -0.081      0.007  0.001  
+INFO: Early stopping
+123   -0.018      -0.015      0.007  0.001  
+training with seed:  75
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.016      -0.016      0.005  0.003  
+INFO: Early stopping
+102   -0.018      -0.018      0.005  0.003  
+training with seed:  4097
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.012      -0.012      0.006  0.002  
+INFO: Early stopping
+112   -0.010      -0.011      0.006  0.002  
+training with seed:  2706
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.226      -0.218      0.006  -0.001 
+INFO: Early stopping
+110   -0.049      -0.041      0.006  0.002  
+training with seed:  2460
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.402      -0.402      0.004  0.001  
+INFO: Early stopping
+121   -0.017      -0.016      0.006  0.003  
+training with seed:  11
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.007      -0.010      0.005  0.002  
+INFO: Early stopping
+110   -0.007      -0.011      0.005  0.002  
+training with seed:  844
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.019      -0.012      0.007  -0.007 
+INFO: Early stopping
+107   -0.019      -0.011      0.007  -0.006 
+training with seed:  2850
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.002       0.002       0.006  -0.009 
+INFO: Early stopping
+101   0.003       0.002       0.006  -0.009 
+training with seed:  2421
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.011      -0.009      0.006  0.002  
+INFO: Early stopping
+102   -0.010      -0.008      0.006  0.002  
+training with seed:  487
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.022      -0.016      0.006  0.004  
+INFO: Early stopping
+101   -0.027      -0.021      0.006  0.004  
+training with seed:  3555
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.002       0.003       0.006  -0.009 
+INFO: Early stopping
+101   0.002       0.003       0.006  -0.009 
+training with seed:  389
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.013      -0.016      0.005  0.002  
+INFO: Early stopping
+103   -0.014      -0.017      0.005  0.002  
+training with seed:  3962
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.016      -0.010      0.006  0.004  
+INFO: Early stopping
+127   -0.014      -0.008      0.006  0.004  
+training with seed:  344
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.010      -0.007      0.007  0.002  
+INFO: Early stopping
+101   -0.010      -0.007      0.007  0.002  
+training with seed:  3285
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.010      -0.008      0.007  -0.009 
+INFO: Early stopping
+107   -0.021      -0.019      0.007  -0.008 
+training with seed:  4632
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.010      -0.015      0.005  0.002  
+INFO: Early stopping
+105   -0.012      -0.017      0.005  0.002  
+training with seed:  4721
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.008      -0.010      0.005  0.002  
+INFO: Early stopping
+101   -0.009      -0.011      0.005  0.002  
+training with seed:  4525
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.009      -0.008      0.006  0.002  
+INFO: Early stopping
+109   -0.010      -0.009      0.006  0.002  
+training with seed:  327
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.001      -0.002      0.007  -0.009 
+INFO: Early stopping
+102   -0.002      -0.003      0.007  -0.009 
+training with seed:  3975
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.009      -0.009      0.005  0.003  
+INFO: Early stopping
+103   -0.009      -0.009      0.005  0.003  
+training with seed:  3707
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.002       0.003       0.007  -0.009 
+INFO: Early stopping
+102   0.002       0.004       0.007  -0.009 
+training with seed:  2310
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.099      -0.096      0.006  0.002  
+INFO: Early stopping
+105   -0.069      -0.066      0.006  0.002  
+training with seed:  1267
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.012      -0.007      0.006  0.003  
+INFO: Early stopping
+109   -0.014      -0.010      0.006  0.003  
+training with seed:  499
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.263      -0.258      0.005  -0.005 
+INFO: Early stopping
+110   -0.011      -0.008      0.005  -0.001 
+training with seed:  3535
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.002       -0.002      0.005  -0.009 
+INFO: Early stopping
+101   0.003       -0.002      0.005  -0.009 
+training with seed:  854
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.016      -0.014      0.006  0.002  
+INFO: Early stopping
+101   -0.015      -0.013      0.006  0.002  
+training with seed:  467
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.012      -0.004      0.007  0.004  
+INFO: Early stopping
+126   -0.011      -0.003      0.007  0.004  
+training with seed:  1904
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.021      -0.025      0.006  0.001  
+INFO: Early stopping
+111   -0.017      -0.021      0.006  0.001  
+training with seed:  2551
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.011      -0.009      0.006  0.003  
+INFO: Early stopping
+110   -0.010      -0.008      0.006  0.003  
+training with seed:  365
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   0.001       0.005       0.007  -0.009 
+INFO: Early stopping
+103   0.001       0.005       0.007  -0.009 
+training with seed:  3901
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.682      -0.679      0.004  0.001  
+INFO: Early stopping
+108   -0.187      -0.183      0.006  0.001  
+training with seed:  190
+no weights
+Time-lagged pairs:	 999998
+Training data:		 699998
+Validation data:	 300000
+Epoch Train Loss  Valid Loss  Eigenvalues             
+100   -0.044      -0.046      0.005  0.002  
+INFO: Early stopping
+129   -0.023      -0.025      0.005  0.002  

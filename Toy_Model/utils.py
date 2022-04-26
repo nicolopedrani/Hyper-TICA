@@ -32,7 +32,7 @@ def execute(command, folder, background=False, print_result=True):
 def f(x,l):
     return np.exp(-x/l)
 
-def train_deeptica_load(temp=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True):
+def train_deeptica_load(temp=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True,tprime=None):
     
     data = load_dataframe(path)
     
@@ -49,10 +49,8 @@ def train_deeptica_load(temp=1.0,lag_time=10,path="colvar.data",descriptors="^p.
     else:
         print("no weights")
         logweight=None
- 
-    #tprime = tprime_evaluation(X,t=t,logweights=logweight)
          
-    dataset = create_time_lagged_dataset(X,t=t,lag_time=lag_time,logweights=logweight)
+    dataset = create_time_lagged_dataset(X,t=t,lag_time=lag_time,logweights=logweight,tprime=tprime)
     n_train  = int( trainsize * len(dataset) )
     n_valid  = len(dataset) - n_train
     train_data, valid_data = random_split(dataset,[n_train,n_valid])
@@ -67,12 +65,12 @@ def train_deeptica_load(temp=1.0,lag_time=10,path="colvar.data",descriptors="^p.
 
     return data,logweight,train_loader,valid_loader,X#,tprime
 
-def training(temp,path,train_parameters):
+def training(temp,path,train_parameters,tprime=None):
 
     data,logweight,train_loader,valid_loader,X = train_deeptica_load(temp=temp,lag_time=train_parameters["lag_time"],  
                                                                             path=path,descriptors=train_parameters["descriptors"],
                                                                             trainsize=train_parameters['trainsize'],
-                                                                            reweighting=train_parameters['reweighting'])
+                                                                            reweighting=train_parameters['reweighting'],tprime=tprime)
     # DEVICE
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

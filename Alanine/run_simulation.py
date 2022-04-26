@@ -64,4 +64,4 @@ ENDPLUMED
 
 #-- run gromacs --#
 execute("cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh "+folder,folder=".")
-execute("./run_gromacs.sh",folder=folder)
+#execute("./run_gromacs.sh",folder=folder)
