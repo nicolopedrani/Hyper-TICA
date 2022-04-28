@@ -48,8 +48,8 @@ def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.
         #-- the logweights are V(x,y)*beta --#
         logweight = (logweight-max(logweight))*beta
     else:
-        print("no weights")
         logweight=None
+        #print("no weights")
  
     #tprime = tprime_evaluation(X,t=t,logweights=logweight)
          
