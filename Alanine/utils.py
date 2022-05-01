@@ -33,7 +33,7 @@ def execute(command, folder, background=False, print_result=True):
 def f(x,l):
     return np.exp(-x/l)
 
-def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True):
+def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True,cpp=False):
     
     data = load_dataframe(path)
     
