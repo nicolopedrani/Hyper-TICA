@@ -33,7 +33,7 @@ def execute(command, folder, background=False, print_result=True):
 def f(x,l):
     return np.exp(-x/l)
 
-def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True,cpp=False):
+def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.",trainsize=0.8,reweighting=True,path_cpp=None):
     
     data = load_dataframe(path)
     
@@ -51,9 +51,12 @@ def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.
         logweight=None
         #print("no weights")
  
-    #tprime = tprime_evaluation(X,t=t,logweights=logweight)
-         
-    dataset = create_time_lagged_dataset(X,t=t,lag_time=lag_time,logweights=logweight)
+    if path_cpp is not None:
+        print("## Using CPP implementation ##")
+        execute("sed -i 's/lag.*/lag = "+str(lag_time)+"/g' input.dat",folder=path_cpp, print_result=False)
+        dataset = create_time_lagged_dataset_cpp("input.dat",path=path_cpp)
+    else:
+        dataset = create_time_lagged_dataset(X,t=t,lag_time=lag_time,logweights=logweight)
     n_train  = int( trainsize * len(dataset) )
     n_valid  = len(dataset) - n_train
     train_data, valid_data = random_split(dataset,[n_train,n_valid])
@@ -66,14 +69,15 @@ def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.
     #print('Training data:\t\t',len(train_data))
     #print('Validation data:\t',len(valid_data))
 
-    return data,logweight,train_loader,valid_loader,X#,tprime
+    return data,logweight,train_loader,valid_loader,X
 
 def training(beta,path,train_parameters):
 
     data,logweight,train_loader,valid_loader,X = train_deeptica_load(beta=beta,lag_time=train_parameters["lag_time"],  
                                                                             path=path,descriptors=train_parameters["descriptors"],
                                                                             trainsize=train_parameters['trainsize'],
-                                                                            reweighting=train_parameters['reweighting'])
+                                                                            reweighting=train_parameters['reweighting'],
+                                                                            path_cpp=train_parameters["path_cpp"])
     # DEVICE
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -100,6 +104,7 @@ def training(beta,path,train_parameters):
 
     return model,data,logweight,X
 
+#-- only for unbias simulation --#
 def fit_timeacorr(descriptors_names,data,axs=None):
 
     if axs is None:
