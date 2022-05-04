@@ -41,9 +41,9 @@ def tica_load(temp=1.0,path="colvar.data",descriptors="^p.",reweighting=True):
     
     if reweighting:
         # Compute logweights for time reweighting
-        logweight = data["opes.bias"].to_numpy()
+        logweight = data["opes.bias"].to_numpy()/temp
         #-- the logweights are V(x,y)/T --#
-        logweight = (logweight-max(logweight))/temp
+        #logweight = (logweight-max(logweight))/temp
     else:
         print("no weights")
         logweight=None

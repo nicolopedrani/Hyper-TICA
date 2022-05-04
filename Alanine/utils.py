@@ -46,9 +46,9 @@ def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.
     
     if reweighting:
         # Compute logweights for time reweighting
-        logweight = data["opes.bias"].to_numpy()
+        logweight = data["opes.bias"].to_numpy()*beta
         #-- the logweights are V(x,y)*beta --#
-        logweight = (logweight-max(logweight))*beta
+        #logweight = (logweight-max(logweight))*beta
     else:
         logweight=None
         #print("no weights")
