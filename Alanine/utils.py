@@ -7,6 +7,7 @@ from matplotlib.gridspec import GridSpec
 plt.rcParams.update({'font.size': 15})
 import matplotlib as mpl
 from scipy.interpolate import griddata
+from scipy import integrate
 
 from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader, tprime_evaluation
 from torch.utils.data import Subset,random_split
@@ -15,6 +16,7 @@ from mlcvs.tica import DeepTICA_CV
 from mlcvs.utils.fes import compute_fes
 
 from scipy.optimize import curve_fit
+from scipy import signal
 
 #-- to run process from jupyter --#
 import subprocess

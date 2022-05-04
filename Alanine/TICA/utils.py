@@ -13,6 +13,7 @@ from mlcvs.tica import TICA_CV
 from mlcvs.utils.fes import compute_fes
 
 from scipy import integrate
+from scipy import signal
 
 #-- to run process from jupyter --#
 import subprocess
