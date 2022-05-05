@@ -1,2 +1,0 @@
-Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/bias1/bias2_02/
-Completed: ./run_gromacs.sh
