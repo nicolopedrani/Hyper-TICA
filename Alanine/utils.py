@@ -92,11 +92,12 @@ def training(beta,path,train_parameters):
 
     # REGULARIZATION
     model.set_optimizer(opt)
-    model.set_earlystopping(patience=train_parameters['es_patience'],
+    if train_parameters["earlystop"]:
+        model.set_earlystopping(patience=train_parameters['es_patience'],
                             min_delta=0.,consecutive=train_parameters['es_consecutive'], save_best_model=True, log=False)
 
     # TRAIN
-    model.fit(train_loader,valid_loader,
+    model.fit(train_loader,valid_loader=valid_loader,
         standardize_inputs=train_parameters['standardize_inputs'],
         standardize_outputs=train_parameters['standardize_outputs'],
         loss_type=train_parameters['loss_type'],

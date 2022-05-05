@@ -28,9 +28,9 @@ def execute(command, folder, background=False, print_result=True):
     else:
         print(cmd.stderr)
 
-def tica_load(beta=1.0,path="colvar.data",descriptors="^p.",reweighting=True,step=100):
+def tica_load(data,beta=1.0,descriptors="^p.",reweighting=True,step=100):
     
-    data = load_dataframe(path)[::step]
+    data = data[::step]
     
     search_values=descriptors
     search_names=descriptors
@@ -40,16 +40,17 @@ def tica_load(beta=1.0,path="colvar.data",descriptors="^p.",reweighting=True,ste
         # Compute logweights for time reweighting
         logweight = data["opes.bias"].to_numpy()*beta
         #-- the logweights are V(x,y)*beta --#
-        #logweight = (logweight-max(logweight))*beta
+        #-- set logweight to 0 when the applied bias is minimum --#
+        logweight = (logweight-min(logweight))*beta
     else:
         logweight=None
         #print("no weights")
 
     return data,logweight,t,X,names
 
-def training(beta,path,train_parameters,tprime=None):
+def training(newdata,beta,train_parameters,tprime=None):
 
-    data,logweight,t,X,names = tica_load(beta=beta,path=path,descriptors=train_parameters["descriptors"],
+    data,logweight,t,X,names = tica_load(data=newdata,beta=beta,descriptors=train_parameters["descriptors"],
                                                     reweighting=train_parameters['reweighting'],step=train_parameters["step"])
     # DEVICE
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -61,7 +62,7 @@ def training(beta,path,train_parameters,tprime=None):
     # TRAIN
     model.fit(X, t, lag=train_parameters["lag_time"], logweights=logweight, tprime=tprime)
     
-    return model,data,logweight,X,names
+    return model,logweight,X,names
 
 def Boltzmann_product(model0,model1,X,j=0,k=1,logweight=None,normed=False):
 

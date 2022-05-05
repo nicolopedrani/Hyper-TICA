@@ -9,7 +9,7 @@ gmx=`which gmx_mpi`
 script=/home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/Alanine/script/bck.meup.sh
 
 ### optional ###
-nsteps=$[500*1000*10] #last is ns
+nsteps=$[500*1000*5] #last is ns
 ntomp=2
 #maxh=1:00 #h:min
 filename=alanine
@@ -32,6 +32,8 @@ fi
 
 ### commands ###
 #mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh"
+#before run this execute cp ../alanine* .
+#mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps -cpi $filename"
 mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
 submit="time mpirun -np $ncore ${mpi_cmd} -pin on -pinoffset 0 -pinstride 1"
 #submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
