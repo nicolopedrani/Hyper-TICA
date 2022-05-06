@@ -48,7 +48,6 @@ def train_deeptica_load(beta=1.0,lag_time=10,path="colvar.data",descriptors="^p.
         # Compute logweights for time reweighting
         logweight = data["opes.bias"].to_numpy()*beta
         #-- the logweights are V(x,y)*beta --#
-        #logweight = (logweight-max(logweight))*beta
     else:
         logweight=None
         #print("no weights")
@@ -105,7 +104,7 @@ def training(beta,path,train_parameters):
         nepochs=train_parameters['num_epochs'],
         info=False, log_every=train_parameters['log_every'])
 
-    return model,data,logweight,X
+    return model,data,logweight,X,train_loader,valid_loader
 
 #-- only for unbias simulation --#
 def fit_timeacorr(descriptors_names,data,axs=None):
@@ -170,8 +169,8 @@ def plot_model_lossfunction(model):
     
     # Common setup
     for ax in axs:
-        if model.earlystopping_.best_epoch is not None:
-            if model.earlystopping_.early_stop:
+        if model.earlystopping_.early_stop:
+            if model.earlystopping_.best_epoch is not None:
                 ax.axvline(model.earlystopping_.best_epoch,ls='dotted',color='grey',alpha=0.5,label='Early Stopping')
                 ax.set_xlabel('#Epochs')
                 ax.legend(ncol=2)
@@ -365,7 +364,7 @@ def create_time_lagged_dataset_cpp(input_file,path="./"):
 
     return dataset
 
-#-- My Autocorrelation --#
+#-- My Autocorrelation, with rescaled time if weights are given --#
 # one descriptor at once 
 def my_autocorrelation_python(x,lag,weight=None,time=None):
    

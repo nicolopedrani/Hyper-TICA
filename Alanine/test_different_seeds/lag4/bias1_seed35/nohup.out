@@ -1,9 +1,0 @@
-lun 25 apr 2022, 14:22:36, CEST
-gromacs for 50000000 steps
-
-time mpirun -np 1 /home/npedrani@iit.local/programs/gromacs-2020.6/install/bin/gmx_mpi mdrun -s input.sA.tpr -deffnm alanine -plumed plumed.dat -ntomp 2 -nsteps 50000000 -pin on -pinoffset 8 -pinstride 1 &>> alanine.out
-
-real	501m50,746s
-user	990m58,389s
-sys	11m5,399s
-lun 25 apr 2022, 22:44:27, CEST
