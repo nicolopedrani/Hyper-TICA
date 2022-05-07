@@ -88,9 +88,10 @@ def training(beta,path,train_parameters):
 
     # OPTIMIZER (Adam)
     opt = torch.optim.Adam(model.parameters(), lr=train_parameters['lrate'], weight_decay=train_parameters['l2_reg'])
-
-    # REGULARIZATION
+    if train_parameters["lrscheduler"]:
+        model.set_LRScheduler(opt)
     model.set_optimizer(opt)
+    
     if train_parameters["earlystop"]:
         model.set_earlystopping(patience=train_parameters['es_patience'],
                             min_delta=0.,consecutive=train_parameters['es_consecutive'], save_best_model=True, log=False)
@@ -102,6 +103,7 @@ def training(beta,path,train_parameters):
         loss_type=train_parameters['loss_type'],
         n_eig=train_parameters['n_eig'],
         nepochs=train_parameters['num_epochs'],
+        batch_sie=train_parameters['batchsie'],
         info=False, log_every=train_parameters['log_every'])
 
     return model,data,logweight,X,train_loader,valid_loader

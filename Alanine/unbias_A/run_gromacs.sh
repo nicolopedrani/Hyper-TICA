@@ -10,7 +10,7 @@ script=/home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/Alanine/scr
 pin_offset=0
 
 ### optional ###
-nsteps=$[500*1000*50] #last is ns
+nsteps=$[500*1000*25] #last is ns
 ntomp=2
 #maxh=1:00 #h:min
 filename=alanine
