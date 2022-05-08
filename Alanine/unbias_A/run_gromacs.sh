@@ -8,6 +8,7 @@ tprfile=input.sA.tpr
 gmx=`which gmx_mpi`
 script=/home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/Alanine/script/bck.meup.sh
 pin_offset=0
+cpi_state=false
 
 ### optional ###
 nsteps=$[500*1000*25] #last is ns
@@ -33,9 +34,15 @@ fi
 
 ### commands ###
 #mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh"
-mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
+
+if [${cpi_state}]
+then
+  mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps -cpi $filename"
+else
+  mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
+fi
+
 submit="time mpirun -np $ncore ${mpi_cmd} -pin on -pinoffset $pin_offset -pinstride 1"
-#submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
 
 ### execute ###
 bash ${script} -i $outfile

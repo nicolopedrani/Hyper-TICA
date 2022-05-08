@@ -35,7 +35,7 @@ fi
 ### commands ###
 #mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh"
 
-if [cpi_state]
+if ${cpi_state}
 then
   mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps -cpi $filename"
 else

@@ -7,7 +7,7 @@ from matplotlib.gridspec import GridSpec
 plt.rcParams.update({'font.size': 15})
 import matplotlib as mpl
 
-from mlcvs.utils.data import create_time_lagged_dataset
+from mlcvs.utils.data import create_time_lagged_dataset, tprime_evaluation
 from mlcvs.utils.io import load_dataframe
 from mlcvs.tica import TICA_CV
 from mlcvs.utils.fes import compute_fes
