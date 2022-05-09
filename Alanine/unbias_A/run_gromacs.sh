@@ -11,7 +11,7 @@ pin_offset=0
 cpi_state=false
 
 ### optional ###
-nsteps=$[500*1000*25] #last is ns
+nsteps=$[500*1000*20] #last is ns
 ntomp=2
 #maxh=1:00 #h:min
 filename=alanine
