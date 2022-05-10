@@ -19,6 +19,7 @@ from scipy import signal
 import subprocess
 import os
 from pathlib import Path
+env = "/home/npedrani@iit.local/programs/plumed2-pytorch/src/lib/libplumedKernel.so"
 # execute bash command in the given folder
 def execute(command, folder, background=False, print_result=True):
     cmd = subprocess.run(command, cwd=folder, shell=True, capture_output = True, text=True, close_fds=background)
