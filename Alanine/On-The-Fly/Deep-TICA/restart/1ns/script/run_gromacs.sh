@@ -17,7 +17,7 @@ ntomp=2
 #maxh=1:00 #h:min
 filename=alanine
 restartfile=$filename*.cpt
-echo $restartfile
+checkpointfile=state.cpt
 plumedfile=plumed.dat
 extra_cmd=""
 
@@ -40,16 +40,17 @@ fi
 
 if ${cpi_state}
 then
-  mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps -cpi $restartfile"
+  mpi_cmd="$gmx mdrun -s $tprfile -cpo $checkpointfile -cpi state -noappend -deffnm $filename $plumedfile $ntomp $nsteps"
 else
-  mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
+  mpi_cmd="$gmx mdrun -s $tprfile -cpo $checkpointfile -deffnm $filename $plumedfile $ntomp $nsteps"
 fi
 
 submit="time mpirun -np $ncore ${mpi_cmd} -pin on -pinoffset $pin_offset -pinstride 1"
 
 ### execute ###
-bash ${script} -i $outfile
-bash ${script} -i ${filename}* > $outfile
+# vorrei eseguirlo ma mi da problemi con il restart.. 
+#bash ${script} -i $outfile
+#bash ${script} -i ${filename}* > $outfile
 echo -e "\n$submit &>> $outfile"
 eval "$submit &>> $outfile"
 [ -z "$extra_cmd" ] || eval $extra_cmd
