@@ -12,4 +12,8 @@ termini di percentuale).
 **training**: direi che non è intelligente portarsi dietro tutti i dataset. Per diversi motivi. Il primo è che si rischia di finire  sempre in un minimo della rete dettato dai troppi dati simili tra loro (la prima parte della simulazione darà sampling simili tra loro). Il secondo lo stesso training può essere davvero strano.. guardo esempio simulazione bias16 per `no\_restart`  
   
 **sampling**: supponiamo di fare una simulazione e partire da un minimo e poi finire in un altro minimo. Quindi spendiamo la maggior parte del nostro tempo nel primo bacino (mettiamo il 48.5 % del tempo) e nel secondo bacino (mettiamo il 48.5 % del tempo) e quindi sullo stato di transizione solo 1%.
-Se applichiamo l'analisi della deep-tica a questo data set la deeptica trova i due bacini e li identifica con un certo valore. Tipo -1 al primo bacino e 1 al secondo bacino. Ma cosa succede li in mezzo? 
+Se applichiamo l'analisi della deep-tica a questo data set la deeptica trova i due bacini e li identifica con un certo valore. Tipo -1 al primo bacino e 1 al secondo bacino. Ma cosa succede li in mezzo? Se non ho transizioni allora in mezzo ho il gradiente della deeptica.. ma una delta per i due stati. Questo non va bene, perchè non esco dai due stati.  
+  
+**cose da fare**: obiettivi:
+-   non trainare la rete con tutti i dati.. ma usarne solo alcuni. All'inizio potrebbero essere solo i primi 10. Ma ci vorrebbe un criterio più intelligente. Tipo i più simili non mi interessano.  
+-   capire come tenere tutti i dati per poi stimare delle proprietà statiche. Come l'energia libera o altri valori medi.  

@@ -11,10 +11,13 @@ pin_offset=0
 cpi_state=false
 
 ### optional ###
-nsteps=$[500*1000*1] #last is ns
+ns=0.5 #nanoseconds of simulation
+nsteps=$(echo "500*1000*$ns" | bc | awk '{ printf("%.0f\n",$1) '})
 ntomp=2
 #maxh=1:00 #h:min
 filename=alanine
+restartfile=$filename*.cpt
+echo $restartfile
 plumedfile=plumed.dat
 extra_cmd=""
 
@@ -37,7 +40,7 @@ fi
 
 if ${cpi_state}
 then
-  mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps -cpi $filename"
+  mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps -cpi $restartfile"
 else
   mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
 fi
