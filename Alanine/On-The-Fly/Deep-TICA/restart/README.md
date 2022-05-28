@@ -19,7 +19,7 @@ termini di percentuale).
 Se applichiamo l'analisi della deep-tica a questo data set la deeptica trova i due bacini e li identifica con un certo valore. Tipo -1 al primo bacino e 1 al secondo bacino. Ma cosa succede li in mezzo? Se non ho transizioni allora in mezzo ho il gradiente della deeptica.. ma una delta per i due stati. Questo non va bene, perchè non esco dai due stati.  
   
 **cose da fare**: obiettivi:
--   non trainare la rete con tutti i dati.. ma usarne solo alcuni. All'inizio potrebbero essere solo i primi 10. Ma ci vorrebbe un criterio più intelligente. Tipo i più simili tra loro non mi interessano.  
+-   non trainare la rete con tutti i dati.. ma usarne solo alcuni. All'inizio potrebbero essere solo i primi 10. Ma ci vorrebbe un criterio più intelligente. Tipo i più simili tra loro non mi interessano. Questo perchè i dati "vecchi" a un certo punto rallentano la convergenza a un cv veramente appropriata. Per cui occorrerà trovare un compromesso tra esplorare tutto lo spazio o solo la zona davvero interessante portandosi dietro i dati più interessanti. Cioè o ci si porta dietro i dati più significativi o solo i dati davvero più interessanti.  
 -   capire come tenere tutti i dati per poi stimare delle proprietà statiche. Come l'energia libera o altri valori medi. In questo modo con una singola simulazione si ottengono due cose in simultanea: cv e free energy   
 
 **altre idee**: 
