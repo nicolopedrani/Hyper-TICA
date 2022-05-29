@@ -1,0 +1,37 @@
+# Reinforcenment Deep-TICA
+
+## README file  
+
+**static folder**: è una idea vecchia su cui io non sono personalmente d'accordo. Cioè quella di portarsi dietro lo static bias ad ogni iterazione. È una cosa che puà aiutare il sampling sicuramente, ma allo stesso tempo peggiorarlo. Occorrerebbe anche un algoritmo per capire quali static togliere a un certo punto. Ma la mia obiezione più grande riguarda il tempo riscalato e il calcolo della free energy. I pesi si sommano e teoricamente i tempi dovrebbe accelerare ancora di più. Ma ciò non è vero.
+Lo static aggiunto ad ogni iterazione lo vedrei in modo sensato nel caso in cui le deeptica successive venissero calcolate senza tempo riscalato, in una prospettiva di accelerazione completa della simulazione. Ma in generale mi ritrovo in disaccordo. 
+
+**restart**: immaginandola on-the-fly allora è corretto fare il restart tra una iterazione e l'altra. Si può anche pensare di non farlo. Il non farlo o farlo non mi è ancora chiaro quale sia il vantaggio. 
+Ho ripensato a non fare il restart. le rete viene comunque trainata su dei dati che partono da un punto iniziale ben preciso. Per cui ci sta che partendo da un punto differente la situazione possa peggiorare (anche se poi l'algoritmo torna ad essere stabile grazie all'allenamento con più dati). 
+Tuttavia il non fare il restart concettualmente non è una brutta idea. Diventa come un reinforcement learning, in cui si riparte dalle stessa configurazione e la si accellera. Vi in questa maniera è molto figo. Occorre capire comunque come migliorarlo ed accelerarlo. 
+
+**toy model**: se con l'alanina funziona occorrerebbe rifarlo anche sul toy model. Questo aiuterebbe a capire le performance.  
+
+**parametri**:
+- tempo di singola simulazione: Non deve essere lungo per efficienza. Ma anche troppo corto potrebbe non aiutare l'algoritmo
+- lag time: lag time minimo ho deciso che sarà sempre lo stride di ogni quanto stampo i dati. I lag massimo non ho ancora deciso un criterio.. solitamente guardo a occhio il training sul primo set della unbias. Poi si stabilizza sempre grazie alle batch. Occorre però tenere a mente che come abbiamo visto scegliere un lag time massimo troppo piccolo può non aiutare. Per questo parametro occorre anche decidere quanti lag time usare tra il min e il max. Io setto sempre a 5. Non sembra assolutamente influenzare di molto la fisica. Per ora ho questi risultati: quando faccio 1ns (con stride 100) prendo come lag max 5. Per 0.5ns (stride 50) prendo 1.9 , con 0.5ns (stride 100) lag max 1  
+- barrier: questa può davvero influenzare il sampling in due modi: se la si mette alta, praticamente quasi giusta, si aiuta l'esplorazione (tenendo sempre a mente che significa anche modificare di pià lo spazio delle fasi). Ma non sempre le cv che si trovano con questo metodo sono fisicamente sensate, nel senso che possono "rompere" il sistema (aumentare la distanza tra due atomi). E deve essere un parametro che non si deve settare ad ogni iterazione.. ma solo all'inizio. Io pongo 30 per queste simulazioni. Con lo static (inteso come scritto sotto) questo problema non c'è e non si setta la barriera e nessun altro parametro di opes. Idea in pià sarebbe: metto una barrier alta e il sistema si rompe? risetto la barriera in runtime diminuendola di una certa percentuale
+- stride: ogni quanto salvare i dati. Questo parametro decide su quanti dati calcolarsi le funzioni di correlazione temporale. Non credo influenzi molto la performance (finchè la scelta è intelligente). Con una simulazione breve, 500 ps, inizialmente ho preso 50. Potrebbe essere troppo piccolo. Con 100 con una simulazione di 1ns invece mi sembra essere utile. Devo provare ancora a mettere 100 anche su quella breve
+### NOTE  
+Può capitare che il sistema di rompi. Forse è meglio scegliere una barrier fin da subito di 30 al posto che 35.. 
+per non far credere alla nuova cv trovata che si possa andare in regioni di rottura. Oppure come sto facendo ora partire  
+da una certa soglia. E se il sistema di rompe riprovare con una soglia più bassa. (-3 per volta ad esempio.. si può ragionare in 
+termini di percentuale).  
+  
+**training**: direi che non è intelligente portarsi dietro tutti i dataset. Per diversi motivi. Il primo è che si rischia di finire  sempre in un minimo della rete dettato dai troppi dati simili tra loro (la prima parte della simulazione darà sampling simili tra loro). Il secondo lo stesso training può essere davvero strano.. guardo esempio simulazione bias16 per `no\_restart`  
+  
+**sampling**: supponiamo di fare una simulazione e partire da un minimo e poi finire in un altro minimo. Quindi spendiamo la maggior parte del nostro tempo nel primo bacino (mettiamo il 48.5 % del tempo) e nel secondo bacino (mettiamo il 48.5 % del tempo) e quindi sullo stato di transizione solo 1%.
+Se applichiamo l'analisi della deep-tica a questo data set la deeptica trova i due bacini e li identifica con un certo valore. Tipo -1 al primo bacino e 1 al secondo bacino. Ma cosa succede li in mezzo? Se non ho transizioni allora in mezzo ho il gradiente della deeptica.. ma una delta per i due stati. Questo non va bene, perchè non esco dai due stati.  
+  
+**cose da fare**: obiettivi:
+-   non trainare la rete con tutti i dati.. ma usarne solo alcuni. All'inizio potrebbero essere solo i primi 10. Ma ci vorrebbe un criterio più intelligente. Tipo i più simili tra loro non mi interessano. Questo perchè i dati "vecchi" a un certo punto rallentano la convergenza a un cv veramente appropriata. Per cui occorrerà trovare un compromesso tra esplorare tutto lo spazio o solo la zona davvero interessante portandosi dietro i dati più interessanti. Cioè o ci si porta dietro i dati più significativi o solo i dati davvero più interessanti.  
+-   capire come tenere tutti i dati per poi stimare delle proprietà statiche. Come l'energia libera o altri valori medi. In questo modo con una singola simulazione si ottengono due cose in simultanea: cv e free energy   
+
+**altre idee**: 
+- usare un bias static con EXTERNAL method in plumed. Guardare come fare e settare il bias = -F(cv). Problema che vedo è la barrier, Nel senso che dai dati non si arriverà mai a sapere quanto vale la barrier da superare.. per cui occorre capirlo bene. Questo avrebbe anche il vantaggio di non dover sapere a priori la barriera da superare in realtà, e anche di non dover aspettare che opes arrivi a convergenza (anche se lo fa velocemente). Però potrebbe diventare difficile controllarlo. Cose da guardare su plumed: EXTERNAL, BIASVALUE, DUMPDERIVATE (per stampare le derivate)
+-  ad ogni iterazione aggiungere come descrittore anche la cv precedente. Questo in realtà è sensato. Nel senso che i descrittori devo essere sia quantità fisiche che rappresentino il sistema, ma allo stesso tempo anche delle quantità che scorrelano lentamente nel tempo. Non a caso la cv1 è sempre più correlata con i descrittori "più lenti"
+- fino ad ora con la alanina ho sempre usato due cv per volta. Si può pensare di usarne solo 1. Per ora aspetto ma è tra le cose da provare
