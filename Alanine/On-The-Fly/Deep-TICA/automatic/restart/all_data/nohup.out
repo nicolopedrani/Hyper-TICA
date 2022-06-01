@@ -1,0 +1,340 @@
+[ 0.2   2.65  5.1   7.55 10.  ]
+###--- PARAMETERS ---###
+Barrier for OPES:  30
+print points every  100  steps
+each iteration lasts  1  ns
+Iterations:  30
+NN will be trained with all the cumulative data
+min lag:  0.2 	 max lag:  10 	 number of lag times =  5
+###--- Start Simulations ---###
+Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+training samples:  3500 	 validation samples 1400
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.669      -0.588      0.220  0.007  
+100   -0.757      -0.656      0.234  0.046  
+INFO: Early stopping
+140   -0.805      -0.682      0.243  0.072  
+ITERATION NUMBER  1
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.906      -0.864      0.344  0.054  
+INFO: Early stopping
+85    -0.939      -0.886      0.360  0.080  
+ITERATION NUMBER  2
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.675      -0.644      0.049  -0.050 
+INFO: Early stopping
+86    -0.706      -0.665      0.056  -0.029 
+ITERATION NUMBER  3
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.607      -0.586      0.087  -0.002 
+INFO: Early stopping
+64    -0.619      -0.591      0.092  0.007  
+ITERATION NUMBER  4
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+46    -0.574      -0.553      0.055  0.017  
+ITERATION NUMBER  5
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+49    -0.547      -0.521      0.065  0.008  
+ITERATION NUMBER  6
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+40    -0.508      -0.480      0.074  0.028  
+ITERATION NUMBER  7
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+46    -0.471      -0.442      0.023  -0.018 
+ITERATION NUMBER  8
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+44    -0.447      -0.421      0.058  -0.027 
+ITERATION NUMBER  9
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.455      -0.432      0.089  -0.009 
+INFO: Early stopping
+51    -0.455      -0.432      0.089  -0.009 
+ITERATION NUMBER  10
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+46    -0.494      -0.469      0.068  -0.031 
+ITERATION NUMBER  11
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.624      -0.607      0.030  -0.050 
+INFO: Early stopping
+99    -0.673      -0.646      0.024  -0.040 
+ITERATION NUMBER  12
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.850      -0.838      0.760  -0.068 
+100   -0.989      -0.971      0.835  -0.018 
+150   -1.056      -1.034      0.867  0.007  
+200   -1.096      -1.070      0.884  0.026  
+ITERATION NUMBER  13
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.729      -0.710      0.502  -0.053 
+100   -0.808      -0.785      0.580  -0.040 
+150   -0.859      -0.829      0.610  -0.035 
+200   -0.893      -0.858      0.627  -0.032 
+ITERATION NUMBER  14
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.173      -1.165      0.835  0.043  
+100   -1.217      -1.211      0.862  0.051  
+INFO: Early stopping
+106   -1.219      -1.214      0.862  0.052  
+ITERATION NUMBER  15
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.179      -1.175      0.868  0.054  
+100   -1.235      -1.231      0.885  0.077  
+INFO: Early stopping
+113   -1.241      -1.236      0.887  0.082  
+ITERATION NUMBER  16
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.841      -0.825      0.109  -0.021 
+100   -0.921      -0.899      0.112  -0.020 
+INFO: Early stopping
+128   -0.940      -0.916      0.112  -0.018 
+ITERATION NUMBER  17
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.231      -1.225      0.915  0.087  
+INFO: Early stopping
+59    -1.235      -1.229      0.919  0.091  
+ITERATION NUMBER CUBLAS error: out of memory (3) in magma_spotrf_LL_expert_gpu at /opt/conda/conda-bld/magma-cuda111_1605822518874/work/src/spotrf_gpu.cpp:137
+CUBLAS error: not initialized (1) in magma_spotrf_LL_expert_gpu at /opt/conda/conda-bld/magma-cuda111_1605822518874/work/src/spotrf_gpu.cpp:137
+CUBLAS error: out of memory (3) in magma_spotrf_LL_expert_gpu at /opt/conda/conda-bld/magma-cuda111_1605822518874/work/src/spotrf_gpu.cpp:138
+CUBLAS error: not initialized (1) in magma_spotrf_LL_expert_gpu at /opt/conda/conda-bld/magma-cuda111_1605822518874/work/src/spotrf_gpu.cpp:138
+python: /opt/conda/conda-bld/magma-cuda111_1605822518874/work/interface_cuda/interface.cpp:810: void magma_queue_create_internal(magma_device_t, magma_queue**, const char*, const char*, int): Assertion `queue->dCarray__ != __null' failed.
+[ 0.2   2.65  5.1   7.55 10.  ]
+###--- PARAMETERS ---###
+Barrier for OPES:  30
+print points every  100  steps
+each iteration lasts  1  ns
+Iterations:  30
+NN will be trained with all the cumulative data
+min lag:  0.2 	 max lag:  10 	 number of lag times =  5
+###--- Start Simulations ---###
+Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+training samples:  3500 	 validation samples 1400
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.669      -0.588      0.220  0.007  
+100   -0.757      -0.656      0.234  0.046  
+INFO: Early stopping
+140   -0.805      -0.682      0.243  0.072  
+already exists
+ITERATION NUMBER  21
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias21/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+cp: cannot stat '../alanine.part0021.log': No such file or directory
+cp: cannot stat '../alanine.part0021.xtc': No such file or directory
+cp: cannot stat '../alanine.part0021.edr': No such file or directory
+
+Completed: ./run_gromacs.sh
+Traceback (most recent call last):
+  File "general_simulation.py", line 251, in <module>
+    data = load_dataframe(folder+"COLVAR")
+  File "/home/npedrani@iit.local/programs/mlcvs/mlcvs/utils/io.py", line 87, in load_dataframe
+    if is_plumed_file(filename):
+  File "/home/npedrani@iit.local/programs/mlcvs/mlcvs/utils/io.py", line 21, in is_plumed_file
+    headers = pd.read_csv(filename, sep=" ", skipinitialspace=True, nrows=0)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 686, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 452, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 946, in __init__
+    self._make_engine(self.engine)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 1178, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 2008, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 382, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 674, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] No such file or directory: 'unbias_A/bias21/COLVAR'
+[ 0.2   2.65  5.1   7.55 10.  ]
+###--- PARAMETERS ---###
+Barrier for OPES:  30
+print points every  100  steps
+each iteration lasts  <module 'time' (built-in)>  ns
+Iterations:  30
+NN will be trained with all the cumulative data
+min lag:  0.2 	 max lag:  10 	 number of lag times =  5
+###--- Start Simulations ---###
+Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+training samples:  3500 	 validation samples 1400
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.669      -0.588      0.220  0.007  
+100   -0.757      -0.656      0.234  0.046  
+INFO: Early stopping
+140   -0.805      -0.682      0.243  0.072  
+already exists
+ITERATION NUMBER  21
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/
+Completed: sed -i '0,/ns/s/ns.*/ns=<module 'time' (built-in)>/' run_gromacs.sh
+./run_gromacs.sh: line 14: syntax error near unexpected token `('
+./run_gromacs.sh: line 14: `ns=<module time (built-in)>'
+
+Traceback (most recent call last):
+  File "general_simulation.py", line 253, in <module>
+    data = load_dataframe(folder+"COLVAR")
+  File "/home/npedrani@iit.local/programs/mlcvs/mlcvs/utils/io.py", line 87, in load_dataframe
+    if is_plumed_file(filename):
+  File "/home/npedrani@iit.local/programs/mlcvs/mlcvs/utils/io.py", line 21, in is_plumed_file
+    headers = pd.read_csv(filename, sep=" ", skipinitialspace=True, nrows=0)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 686, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 452, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 946, in __init__
+    self._make_engine(self.engine)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 1178, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 2008, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 382, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 674, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] No such file or directory: 'unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/COLVAR'
+[ 0.2   2.65  5.1   7.55 10.  ]
+###--- PARAMETERS ---###
+Barrier for OPES:  30
+print points every  100  steps
+each iteration lasts  <module 'time' (built-in)>  ns
+Iterations:  30
+NN will be trained with all the cumulative data
+min lag:  0.2 	 max lag:  10 	 number of lag times =  5
+###--- Start Simulations ---###
+Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+training samples:  3500 	 validation samples 1400
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.669      -0.588      0.220  0.007  
+100   -0.757      -0.656      0.234  0.046  
+INFO: Early stopping
+140   -0.805      -0.682      0.243  0.072  
+already exists
+ITERATION NUMBER  21
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Traceback (most recent call last):
+  File "general_simulation.py", line 253, in <module>
+    data = load_dataframe(folder+"COLVAR")
+  File "/home/npedrani@iit.local/programs/mlcvs/mlcvs/utils/io.py", line 87, in load_dataframe
+    if is_plumed_file(filename):
+  File "/home/npedrani@iit.local/programs/mlcvs/mlcvs/utils/io.py", line 21, in is_plumed_file
+    headers = pd.read_csv(filename, sep=" ", skipinitialspace=True, nrows=0)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 686, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 452, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 946, in __init__
+    self._make_engine(self.engine)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 1178, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/pandas/io/parsers.py", line 2008, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 382, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 674, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] No such file or directory: 'unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/COLVAR'
+[ 0.2   2.65  5.1   7.55 10.  ]
+###--- PARAMETERS ---###
+Barrier for OPES:  30
+print points every  100  steps
+each iteration lasts  <module 'time' (built-in)>  ns
+Iterations:  30
+NN will be trained with all the cumulative data
+min lag:  0.2 	 max lag:  10 	 number of lag times =  5
+###--- Start Simulations ---###
+Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+training samples:  3500 	 validation samples 1400
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.669      -0.588      0.220  0.007  
+100   -0.757      -0.656      0.234  0.046  
+INFO: Early stopping
+140   -0.805      -0.682      0.243  0.072  
+already exists
+ITERATION NUMBER  20
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.029      -0.994      0.751  -0.003 
+100   -1.134      -1.088      0.795  0.007  
+150   -1.203      -1.147      0.813  0.021  
+200   -1.242      -1.178      0.823  0.033  
+ITERATION NUMBER  21
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.904      -0.872      0.101  0.004  
+100   -0.982      -0.926      0.161  0.017  
+INFO: Early stopping
+108   -0.990      -0.930      0.171  0.020  
+ITERATION NUMBER  22
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Traceback (most recent call last):
+  File "general_simulation.py", line 269, in <module>
+    if train_sim is not None:
+  File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/torch/utils/data/dataset.py", line 351, in random_split
+    raise ValueError("Sum of input lengths does not equal the length of the input dataset!")
+ValueError: Sum of input lengths does not equal the length of the input dataset!

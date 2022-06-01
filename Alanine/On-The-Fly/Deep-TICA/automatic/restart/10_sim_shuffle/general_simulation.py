@@ -32,8 +32,8 @@ time = 1 # in nanoseconds, time of single simulation
 size = (time/dt)/STRIDE # total sampled points for each simulation
 restart = True # if restart simulation
 #-- minimum and maximum lag time --#
-min_lag,max_lag = 0.2,10 #if stride is 100, 0.2,5 should be ok
-n = 10 # how many lag times between min and max lag
+min_lag,max_lag = 1,10 #if stride is 100, 0.2,5 should be ok
+n = 1 # how many lag times between min and max lag
 lags = np.linspace(min_lag,max_lag,n) #-- how many batches for the train and valid set of a single simulation
 print(lags)
 train_sim = 10 # number of previous simulations to train the NN

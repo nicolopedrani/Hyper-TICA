@@ -7,7 +7,7 @@ ncore=1
 tprfile=input.sA.tpr
 gmx=`which gmx_mpi`
 script=/home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/Alanine/script/bck.meup.sh
-pin_offset=0
+pin_offset=12
 cpi_state=false
 
 ### optional ###

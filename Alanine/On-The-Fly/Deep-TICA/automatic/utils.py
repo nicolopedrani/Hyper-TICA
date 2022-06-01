@@ -431,7 +431,7 @@ def create_time_lagged_dataset_cpp(input_file,path="./"):
 
 #-- My Autocorrelation, with rescaled time if weights are given --#
 # one descriptor at once 
-def my_autocorrelation_python(x,lag,weight=None,time=None):
+def my_autocorrelation_python(x,lag,weight=None,time=None, tprime=None):
    
     N = len(x)
     if weight is None:
@@ -439,7 +439,7 @@ def my_autocorrelation_python(x,lag,weight=None,time=None):
     if time is None:
         time = np.arange(0,N)
 
-    data = create_time_lagged_dataset(x, t = time, lag_time = lag, logweights = np.log(weight))
+    data = create_time_lagged_dataset(x, t = time, lag_time = lag, logweights = np.log(weight),tprime=tprime)
     x_t,x_lag,w_t,w_lag = np.array(data[:][0]),np.array(data[:][1]),np.array(data[:][2]),np.array(data[:][3])
     Nw = np.sum(w_t)
     mean = np.average(x_t,weights=w_t)

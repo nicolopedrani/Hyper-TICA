@@ -28,12 +28,12 @@ correction_factor = 0.9 # if the selected barrier is too high it can broke che s
 STRIDE = 100 # stride of the simulation, usually 100 which means 1/5 ps
 iterations = 30 # number of iterations, I have not decided yet which criterion to stop the iterations
 dt = 0.000002 # time step of simulation, in nanoseconds
-time = 1 # in nanoseconds, time of single simulation
-size = (time/dt)/STRIDE # total sampled points for each simulation
+Time = 1 # in nanoseconds, time of single simulation
+size = (Time/dt)/STRIDE # total sampled points for each simulation
 restart = True # if restart simulation
 #-- minimum and maximum lag time --#
 min_lag,max_lag = 0.2,10 #if stride is 100, 0.2,5 should be ok
-n = 10 # how many lag times between min and max lag
+n = 5 # how many lag times between min and max lag
 lags = np.linspace(min_lag,max_lag,n) #-- how many batches for the train and valid set of a single simulation
 print(lags)
 train_sim = None # number of previous simulations to train the NN
@@ -89,7 +89,7 @@ ENDPLUMED
 print("###--- Start Simulations ---###")
 #-- run gromacs --#
 execute("cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh "+folder,folder=".")
-execute("sed -i '0,/ns/s/ns.*/ns="+str(time)+"/' run_gromacs.sh",folder=folder)
+execute("sed -i '0,/ns/s/ns.*/ns="+str(Time)+"/' run_gromacs.sh",folder=folder)
 execute("./run_gromacs.sh",folder=folder)
 
 # load data
@@ -178,8 +178,6 @@ except:
 model.to("cpu")
 model.export(save_folder)
 
-# evaluate variance of this first cv
-
 for i in range(1,iterations):
 
     print("ITERATION NUMBER ", i)
@@ -223,7 +221,7 @@ for i in range(1,iterations):
 
     #-- run gromacs --#
     execute("cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh "+folder,folder=".")
-    execute("sed -i '0,/ns/s/ns.*/ns="+str(time)+"/' run_gromacs.sh",folder=folder)
+    execute("sed -i '0,/ns/s/ns.*/ns="+str(Time)+"/' run_gromacs.sh",folder=folder)
     if restart:
         #restart simulation
         execute("sed -i '0,/cpi_state/s/cpi_state.*/cpi_state=true/' run_gromacs.sh",folder=folder, print_result=False)
@@ -267,8 +265,6 @@ for i in range(1,iterations):
         train_data, valid_data = random_split(dataset,[n_train,n_valid])
         train_datasets.append(train_data)
         valid_datasets.append(valid_data)
-
-    print( len(train_datasets[-train_sim*n:]) )
 
     if train_sim is not None:
         train_loader = FastTensorDataLoader(train_datasets[-train_sim*n:], batch_size=n_train,shuffle=shuffle)
