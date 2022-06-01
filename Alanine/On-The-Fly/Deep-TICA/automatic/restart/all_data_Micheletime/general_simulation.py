@@ -22,7 +22,7 @@ sim_parameters = {
     'plot_max_fes' :70,
 }
 
-BARRIER = 30 # barrier parameter for OPES  
+BARRIER = 40 # barrier parameter for OPES  
 correction_factor = 0.9 # if the selected barrier is too high it can broke che system and gromacs fails. With this factor I change the
                         # the barrier value, setting it to 0.9 its previous value
 STRIDE = 100 # stride of the simulation, usually 100 which means 1/5 ps
@@ -51,7 +51,7 @@ add_new_descriptors = False # if to add new descriptors during simulation:
 print("###--- PARAMETERS ---###")
 print("Barrier for OPES: ", BARRIER)
 print("print points every ", STRIDE, " steps")
-print("each iteration lasts ", time, " ns")
+print("each iteration lasts ", Time, " ns")
 print("Iterations: ", iterations)
 if train_sim is not None:
     print("NN will be trained with the last ", train_sim, " simulation data")
@@ -250,10 +250,12 @@ for i in range(1,iterations):
     t = data['time'].values
     X = data[descriptors_names].values
     logweight = data["opes.bias"].to_numpy()*sim_parameters["beta"]
-    logweight -= max(logweight)
+    #logweight -= max(logweight)
     dt = t[1]-t[0]
     tprime = dt * np.cumsum(np.exp(logweight))
-
+    
+    tprime = None
+    logweight = None
     # create time lagged dataset with different lag times
     for lag in lags:
         #random split
