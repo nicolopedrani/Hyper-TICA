@@ -28,8 +28,8 @@ correction_factor = 0.9 # if the selected barrier is too high it can broke che s
 STRIDE = 100 # stride of the simulation, usually 100 which means 1/5 ps
 iterations = 30 # number of iterations, I have not decided yet which criterion to stop the iterations
 dt = 0.000002 # time step of simulation, in nanoseconds
-time = 1 # in nanoseconds, time of single simulation
-size = (time/dt)/STRIDE # total sampled points for each simulation
+Time = 1 # in nanoseconds, time of single simulation
+size = (Time/dt)/STRIDE # total sampled points for each simulation
 restart = True # if restart simulation
 #-- minimum and maximum lag time --#
 min_lag,max_lag = 1,10 #if stride is 100, 0.2,5 should be ok
@@ -51,7 +51,7 @@ add_new_descriptors = False # if to add new descriptors during simulation:
 print("###--- PARAMETERS ---###")
 print("Barrier for OPES: ", BARRIER)
 print("print points every ", STRIDE, " steps")
-print("each iteration lasts ", time, " ns")
+print("each iteration lasts ", Time, " ns")
 print("Iterations: ", iterations)
 if train_sim is not None:
     print("NN will be trained with the last ", train_sim, " simulation data")
@@ -89,7 +89,7 @@ ENDPLUMED
 print("###--- Start Simulations ---###")
 #-- run gromacs --#
 execute("cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh "+folder,folder=".")
-execute("sed -i '0,/ns/s/ns.*/ns="+str(time)+"/' run_gromacs.sh",folder=folder)
+execute("sed -i '0,/ns/s/ns.*/ns="+str(Time)+"/' run_gromacs.sh",folder=folder)
 execute("./run_gromacs.sh",folder=folder)
 
 # load data
@@ -223,7 +223,7 @@ for i in range(1,iterations):
 
     #-- run gromacs --#
     execute("cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh "+folder,folder=".")
-    execute("sed -i '0,/ns/s/ns.*/ns="+str(time)+"/' run_gromacs.sh",folder=folder)
+    execute("sed -i '0,/ns/s/ns.*/ns="+str(Time)+"/' run_gromacs.sh",folder=folder)
     if restart:
         #restart simulation
         execute("sed -i '0,/cpi_state/s/cpi_state.*/cpi_state=true/' run_gromacs.sh",folder=folder, print_result=False)
@@ -314,7 +314,7 @@ for i in range(1,iterations):
 
 
 print("###--- End Simulations ---###")
-print("total time of simulations: ", iterations*time, " ns")
+print("total time of simulations: ", iterations*Time, " ns")
 end = time.time()
 print("Run for: ",end - start, " s")
 

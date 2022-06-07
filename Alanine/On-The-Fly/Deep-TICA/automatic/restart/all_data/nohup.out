@@ -338,3 +338,276 @@ Traceback (most recent call last):
   File "/home/npedrani@iit.local/anaconda3/envs/mlcvs/lib/python3.7/site-packages/torch/utils/data/dataset.py", line 351, in random_split
     raise ValueError("Sum of input lengths does not equal the length of the input dataset!")
 ValueError: Sum of input lengths does not equal the length of the input dataset!
+[0.2 1.4 2.6 3.8 5. ]
+###--- PARAMETERS ---###
+Barrier for OPES:  40
+print points every  100  steps
+each iteration lasts  1  ns
+Iterations:  30
+NN will be trained with all the cumulative data
+min lag:  0.2 	 max lag:  5 	 number of lag times =  5
+###--- Start Simulations ---###
+Completed: cp script/input.* script/plumed_descriptors.data script/run_gromacs.sh unbias_A/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+training samples:  3500 	 validation samples 1450
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -0.834      -0.789      0.449  0.103  
+100   -0.906      -0.825      0.458  0.133  
+INFO: Early stopping
+101   -0.907      -0.825      0.458  0.134  
+ITERATION NUMBER  1
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.078      -1.061      0.606  0.295  
+100   -1.226      -1.187      0.711  0.311  
+150   -1.322      -1.263      0.746  0.321  
+200   -1.382      -1.316      0.764  0.328  
+ITERATION NUMBER  2
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.227      -1.207      0.249  0.043  
+100   -1.301      -1.268      0.341  0.060  
+INFO: Early stopping
+137   -1.329      -1.288      0.373  0.070  
+ITERATION NUMBER  3
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.250      -1.243      0.387  0.083  
+INFO: Early stopping
+99    -1.288      -1.277      0.404  0.101  
+ITERATION NUMBER  4
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.202      -1.198      0.286  0.079  
+100   -1.249      -1.239      0.315  0.132  
+INFO: Early stopping
+120   -1.262      -1.249      0.323  0.147  
+ITERATION NUMBER  5
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.371      -1.363      0.915  0.248  
+100   -1.414      -1.403      0.941  0.276  
+INFO: Early stopping
+133   -1.434      -1.420      0.947  0.288  
+ITERATION NUMBER  6
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.185      -1.182      0.336  0.000  
+INFO: Early stopping
+70    -1.200      -1.194      0.343  0.005  
+ITERATION NUMBER  7
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.121      -1.120      0.098  -0.027 
+INFO: Early stopping
+85    -1.143      -1.140      0.099  -0.022 
+ITERATION NUMBER  8
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.134      -1.133      0.568  0.247  
+100   -1.202      -1.197      0.712  0.259  
+150   -1.259      -1.251      0.787  0.265  
+200   -1.302      -1.292      0.822  0.269  
+ITERATION NUMBER  9
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.200      -1.189      0.685  0.177  
+100   -1.267      -1.252      0.942  0.178  
+150   -1.322      -1.306      1.015  0.180  
+200   -1.371      -1.355      1.040  0.185  
+ITERATION NUMBER  10
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.457      -1.451      0.952  0.513  
+INFO: Early stopping
+92    -1.489      -1.483      0.954  0.495  
+ITERATION NUMBER  11
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.264      -1.250      0.818  0.053  
+100   -1.379      -1.366      0.863  0.056  
+150   -1.415      -1.402      0.875  0.057  
+INFO: Early stopping
+156   -1.417      -1.405      0.876  0.057  
+ITERATION NUMBER  12
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.352      -1.352      0.861  -0.030 
+100   -1.419      -1.416      0.890  -0.026 
+INFO: Early stopping
+132   -1.436      -1.432      0.898  -0.024 
+ITERATION NUMBER  13
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.371      -1.367      0.759  0.067  
+100   -1.421      -1.414      0.778  0.075  
+INFO: Early stopping
+113   -1.426      -1.419      0.782  0.077  
+ITERATION NUMBER  14
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.342      -1.337      0.828  0.283  
+100   -1.415      -1.409      0.844  0.341  
+INFO: Early stopping
+139   -1.439      -1.431      0.848  0.356  
+ITERATION NUMBER  15
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.400      -1.392      0.815  0.170  
+100   -1.447      -1.434      0.824  0.184  
+INFO: Early stopping
+104   -1.449      -1.436      0.825  0.185  
+ITERATION NUMBER  16
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.419      -1.411      0.644  0.268  
+INFO: Early stopping
+86    -1.442      -1.433      0.676  0.283  
+ITERATION NUMBER  17
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.428      -1.427      0.732  0.239  
+100   -1.467      -1.465      0.750  0.263  
+INFO: Early stopping
+107   -1.470      -1.468      0.751  0.264  
+ITERATION NUMBER  18
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.555      -1.544      0.744  0.389  
+100   -1.601      -1.587      0.751  0.393  
+INFO: Early stopping
+110   -1.606      -1.592      0.753  0.394  
+ITERATION NUMBER  19
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.413      -1.407      0.895  0.433  
+INFO: Early stopping
+97    -1.460      -1.449      0.901  0.520  
+ITERATION NUMBER  20
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.402      -1.399      0.909  0.084  
+100   -1.433      -1.428      0.914  0.093  
+INFO: Early stopping
+114   -1.440      -1.435      0.915  0.091  
+ITERATION NUMBER  21
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.385      -1.380      0.597  0.154  
+100   -1.445      -1.437      0.650  0.233  
+150   -1.492      -1.479      0.678  0.286  
+INFO: Early stopping
+173   -1.504      -1.491      0.682  0.295  
+ITERATION NUMBER  22
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.463      -1.461      0.821  0.396  
+100   -1.536      -1.532      0.823  0.387  
+150   -1.579      -1.573      0.823  0.352  
+INFO: Early stopping
+168   -1.588      -1.581      0.822  0.342  
+ITERATION NUMBER  23
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.393      -1.390      0.515  0.140  
+INFO: Early stopping
+67    -1.402      -1.398      0.515  0.128  
+ITERATION NUMBER  24
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/bias24/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.405      -1.398      0.577  0.260  
+INFO: Early stopping
+62    -1.410      -1.403      0.581  0.268  
+ITERATION NUMBER  25
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/bias24/bias25/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.389      -1.385      0.653  0.047  
+INFO: Early stopping
+63    -1.395      -1.391      0.653  0.053  
+ITERATION NUMBER  26
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/bias24/bias25/bias26/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.368      -1.364      0.959  0.118  
+INFO: Early stopping
+58    -1.371      -1.367      0.960  0.121  
+ITERATION NUMBER  27
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/bias24/bias25/bias26/bias27/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.361      -1.358      0.533  0.056  
+INFO: Early stopping
+63    -1.368      -1.363      0.533  0.064  
+ITERATION NUMBER  28
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/bias24/bias25/bias26/bias27/bias28/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+INFO: Early stopping
+Epoch Train Loss  Valid Loss  Eigenvalues             
+42    -1.366      -1.363      0.809  0.001  
+ITERATION NUMBER  29
+Completed: cp script/input.* script/plumed_descriptors.data script/positions.data script/run_gromacs.sh unbias_A/bias1/bias2/bias3/bias4/bias5/bias6/bias7/bias8/bias9/bias10/bias11/bias12/bias13/bias14/bias15/bias16/bias17/bias18/bias19/bias20/bias21/bias22/bias23/bias24/bias25/bias26/bias27/bias28/bias29/
+Completed: sed -i '0,/ns/s/ns.*/ns=1/' run_gromacs.sh
+Completed: ./run_gromacs.sh
+Epoch Train Loss  Valid Loss  Eigenvalues             
+50    -1.370      -1.366      0.682  0.091  
+INFO: Early stopping
+63    -1.377      -1.373      0.680  0.098  
+###--- End Simulations ---###
+Traceback (most recent call last):
+  File "general_simulation.py", line 313, in <module>
+    print("total time of simulations: ", iterations*time, " ns")
+TypeError: unsupported operand type(s) for *: 'int' and 'module'

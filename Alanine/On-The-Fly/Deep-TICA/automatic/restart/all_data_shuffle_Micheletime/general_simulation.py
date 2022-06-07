@@ -309,7 +309,7 @@ for i in range(1,iterations):
 
 
 print("###--- End Simulations ---###")
-print("total time of simulations: ", iterations*time, " ns")
+print("total time of simulations: ", iterations*Time, " ns")
 end = time.time()
 print("Run for: ",end - start, " s")
 

@@ -1,5 +1,8 @@
 # Reinforcenment Deep-TICA
 
+**restart**: la cartella restart la uso per fare dei test su cose nuove.  
+In **automatic** Ho le cose più recenti
+
 ## README file  
 
 **static folder**: è una idea vecchia su cui io non sono personalmente d'accordo. Cioè quella di portarsi dietro lo static bias ad ogni iterazione. È una cosa che puà aiutare il sampling sicuramente, ma allo stesso tempo peggiorarlo. Occorrerebbe anche un algoritmo per capire quali static togliere a un certo punto. Ma la mia obiezione più grande riguarda il tempo riscalato e il calcolo della free energy. I pesi si sommano e teoricamente i tempi dovrebbe accelerare ancora di più. Ma ciò non è vero.

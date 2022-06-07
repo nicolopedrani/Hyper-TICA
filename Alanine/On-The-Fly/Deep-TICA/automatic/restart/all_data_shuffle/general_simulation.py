@@ -22,7 +22,7 @@ sim_parameters = {
     'plot_max_fes' :70,
 }
 
-BARRIER = 30 # barrier parameter for OPES  
+BARRIER = 40 # barrier parameter for OPES  
 correction_factor = 0.9 # if the selected barrier is too high it can broke che system and gromacs fails. With this factor I change the
                         # the barrier value, setting it to 0.9 its previous value
 STRIDE = 100 # stride of the simulation, usually 100 which means 1/5 ps
@@ -32,7 +32,7 @@ Time = 1 # in nanoseconds, time of single simulation
 size = (Time/dt)/STRIDE # total sampled points for each simulation
 restart = True # if restart simulation
 #-- minimum and maximum lag time --#
-min_lag,max_lag = 1,10 #if stride is 100, 0.2,5 should be ok
+min_lag,max_lag = 1,5 
 n = 1 # how many lag times between min and max lag
 lags = np.linspace(min_lag,max_lag,n) #-- how many batches for the train and valid set of a single simulation
 print(lags)
@@ -51,7 +51,7 @@ add_new_descriptors = False # if to add new descriptors during simulation:
 print("###--- PARAMETERS ---###")
 print("Barrier for OPES: ", BARRIER)
 print("print points every ", STRIDE, " steps")
-print("each iteration lasts ", time, " ns")
+print("each iteration lasts ", Time, " ns")
 print("Iterations: ", iterations)
 if train_sim is not None:
     print("NN will be trained with the last ", train_sim, " simulation data")
@@ -310,9 +310,8 @@ for i in range(1,iterations):
     # evaluate the variance of new cvs
     logweight = (data["opes.bias"].to_numpy()-max(data["opes.bias"].to_numpy()) )*sim_parameters["beta"]
 
-
 print("###--- End Simulations ---###")
-print("total time of simulations: ", iterations*time, " ns")
+print("total time of simulations: ", iterations*Time, " ns")
 end = time.time()
 print("Run for: ",end - start, " s")
 

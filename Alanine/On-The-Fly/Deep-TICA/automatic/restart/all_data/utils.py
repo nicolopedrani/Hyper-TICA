@@ -28,10 +28,8 @@ def execute(command, folder, background=False, print_result=True):
     if cmd.returncode == 0:
         if print_result:
             print(f'Completed: {command}')
-            return True
     else:
         print(cmd.stderr)
-        return False
 
 #-- fitting time auto-correlation function --#
 def f(x,l):
