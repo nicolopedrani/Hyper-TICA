@@ -1,6 +1,7 @@
 # first attemp to generalize the reinforcement tica
 
 #-- useful python script for training the DeepTICA cvs --#
+from numpy import append
 from utils import *
 #-- to not visualize warnings --#
 import warnings
@@ -32,31 +33,18 @@ Time = 1 # in nanoseconds, time of single simulation
 size = (Time/dt)/STRIDE # total sampled points for each simulation
 restart = True # if restart simulation
 #-- minimum and maximum lag time --#
-min_lag,max_lag = 1,5 
-n = 1 # how many lag times between min and max lag
+min_lag,max_lag = 0.2,5 
+n = 5 # how many lag times between min and max lag
 lags = np.linspace(min_lag,max_lag,n) #-- how many batches for the train and valid set of a single simulation
 print(lags)
-train_sim = None # number of previous simulations to train the NN
-shuffle = True # if shuffle the data between batches
-#-- work in progress --#
-add_new_descriptors = False # if to add new descriptors during simulation:
-# The idea is to add as descriptors also the previous found cvs 
-# Probably this will not improve the performance because the cvs themselves are functions of the descriptors.. But we can give it a try
-# this is not computationally very expensive but not straightforward to implement. 
-# It means to add the relative columns of the previous datasets and hence 
-# evaluate at each iteration the new time lagged couples
-# this implementation can in principle be useful also not to carry all the previous data. In this case it is not necessary to add
-# columns to previous datasets because they are not used
+shuffle = False # if shuffle the data between batches
 
 print("###--- PARAMETERS ---###")
 print("Barrier for OPES: ", BARRIER)
 print("print points every ", STRIDE, " steps")
 print("each iteration lasts ", Time, " ns")
 print("Iterations: ", iterations)
-if train_sim is not None:
-    print("NN will be trained with the last ", train_sim, " simulation data")
-else:
-    print("NN will be trained with all the cumulative data")
+print("NN will be trained with all the cumulative data")
 print("min lag: ", min_lag, "\t max lag: ", max_lag, "\t number of lag times = ", n)
 if shuffle:
     print("the data between batches will be shuffled")
@@ -109,7 +97,7 @@ train_parameters = {
               'trainsize':0.7, 
               'lrate':1e-3,
               'l2_reg':0.,
-              'num_epochs':200,
+              'num_epochs':500,
               'batchsize': -1, #---> è da fare sul train loder and valid loader
               'es_patience':10,
               'es_consecutive':True,
@@ -137,10 +125,6 @@ for lag in lags:
     train_data, valid_data = random_split(dataset,[n_train,n_valid])
     train_datasets.append(train_data)
     valid_datasets.append(valid_data)
-
-# to not divide the set, it create a dataset composed by all the found couples with different lag times
-#print(n*n_train)
-#print(len(ConcatDataset(train_datasets)))
 
 train_loader = FastTensorDataLoader(train_datasets, batch_size=n_train,shuffle=shuffle)
 valid_loader = FastTensorDataLoader(valid_datasets, batch_size=n_valid,shuffle=shuffle)
@@ -253,28 +237,41 @@ for i in range(1,iterations):
     X = data[descriptors_names].values
     # alternative method to not modify temperature but only rescale the bias
     logweight = data["opes.bias"].to_numpy()-max(data["opes.bias"].to_numpy())
-    # michele suggerisce di non riscalare, ma così rischio di ottenere delle stime non bounded della matrice di correlazione. Per cui riscalo
-    logweight /= np.abs(min(logweight))
     logweight *= sim_parameters["beta"]
+    logweight /= np.abs(min(logweight))
     dt = t[1]-t[0]
     tprime = dt * np.cumsum(np.exp(logweight))
 
     # create time lagged dataset with different lag times
-    for lag in lags:
+    for k,lag in enumerate(lags):
         #random split
         # TensorDataset (x_t,x_lag,w_t,w_lag)
         dataset = create_time_lagged_dataset(X,t=t,lag_time=np.round(lag,3),logweights=logweight,tprime=tprime,interval=[0,n_train+n_valid])
         train_data, valid_data = random_split(dataset,[n_train,n_valid])
-        train_datasets.append(train_data)
-        valid_datasets.append(valid_data)
+        train_datasets.insert( (i+1)*k+i ,train_data)
+        valid_datasets.insert( (i+1)*k+i ,valid_data)
+        #train_datasets.append(train_data)
+        #valid_datasets.append(valid_data)
 
-    if train_sim is not None:
-        train_loader = FastTensorDataLoader(train_datasets[-train_sim*n:], batch_size=n_train,shuffle=shuffle)
-        valid_loader = FastTensorDataLoader(valid_datasets[-train_sim*n:], batch_size=n_valid,shuffle=shuffle)
-    else:
-        train_loader = FastTensorDataLoader(train_datasets, batch_size=n_train,shuffle=shuffle)
-        valid_loader = FastTensorDataLoader(valid_datasets, batch_size=n_valid,shuffle=shuffle)
-    
+    #ShuffleDataset(ConcatDataset)
+
+    Train_data = ConcatDataset(train_datasets)
+    Valid_data = ConcatDataset(valid_datasets)
+
+    # in this way the number of batches is equal to the number of lag times chosen 
+    batch_size_train = n_train*(i+1)
+    batch_size_valid = n_valid*(i+1) 
+
+    # to not divide the set, it create a dataset composed by all the found couples with different lag times
+    #print(n*n_train)
+    #print(len(ConcatDataset(train_datasets)))
+
+    train_loader = FastTensorDataLoader(Train_data, batch_size=batch_size_train,shuffle=shuffle)
+    valid_loader = FastTensorDataLoader(Valid_data, batch_size=batch_size_valid,shuffle=shuffle)
+
+    #train_loader = FastTensorDataLoader(train_datasets, batch_size=batch_size_train,shuffle=shuffle)
+    #valid_loader = FastTensorDataLoader(valid_datasets, batch_size=batch_size_valid,shuffle=shuffle)
+
     # MODEL
     model = DeepTICA_CV(train_parameters['nodes'],activation=train_parameters['activ_type'],gaussian_random_initialization=True)
     model.to(device)

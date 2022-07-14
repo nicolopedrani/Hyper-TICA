@@ -1,6 +1,6 @@
-nstep	100000000
+nstep	500000
 tstep	0.005
-temperature	0.5
+temperature	1
 friction	10
 random_seed	4525
 plumed_input	plumed.dat

@@ -141,9 +141,9 @@ bonds that rotated more than 30 degrees:
 Writing final coordinates.
 
                Core t (s)   Wall t (s)        (%)
-       Time:      579.839      289.920      200.0
+       Time:     1680.257      840.129      200.0
                  (ns/day)    (hour/ns)
-Performance:      298.014        0.081
+Performance:      102.842        0.233
 
-GROMACS reminds you: "Or (horrors!) use Berendsen!" (Justin Lemkul)
+GROMACS reminds you: "We Have No Money" (E. Clementi)
 

@@ -1,0 +1,18 @@
+#! FIELDS time pca2.eig-1 pca2.eig-2 sigma_pca2.eig-1 sigma_pca2.eig-2 height
+#! SET action OPES_METAD_state
+#! SET biasfactor       16.03631500507211
+#! SET epsilon   3.735419329000485e-08
+#! SET kernel_cutoff       5.848558909940468
+#! SET compression_threshold                       1
+#! SET zed      0.9999999625350703
+#! SET sum_weights       980.0000345414073
+#! SET sum_weights2       980.0000686487143
+#! SET counter  982
+#! SET adaptive_counter  495000
+#! SET sigma0_pca2.eig-1                     0.1
+#! SET av_cv_pca2.eig-1                       0
+#! SET av_M2_pca2.eig-1                       0
+#! SET sigma0_pca2.eig-2                     0.1
+#! SET av_cv_pca2.eig-2                       0
+#! SET av_M2_pca2.eig-2                       0
+                   1990                      0                      0                    0.1                    0.1      980.0000344328856

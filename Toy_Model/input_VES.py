@@ -58,13 +58,13 @@ def Mullerpot():
     y0=["-0","-0.5","-1.5","-1"]
     for k in range(4):
         potential+= A[k]+"*exp("+a[k]+"*(x"+x0[k]+")^2"+b[k]+"*(x"+x0[k]+")*(y"+y0[k]+")"+c[k]+"*(y"+y0[k]+")^2)"
-    potential+=")/10"
+    potential+=")/9"
     return potential
 
 #Muller potential function
 def Mullerfunction(x,y):
     a = -200*np.exp(-1*(x-1)**2+0*(x-1)*(y-0)-10*(y-0)**2)-100*np.exp(-1*(x-0)**2+0*(x-0)*(y-0.5)-10*(y-0.5)**2)-170*np.exp(-6.5*(x+0.5)**2+11*(x+0.5)*(y-1.5)-6.5*(y-1.5)**2)+15*np.exp(0.7*(x+1)**2+0.6*(x+1)*(y-1)+0.7*(y-1)**2)
-    return a/10
+    return a/9
 
 #Wolfe-Quapp potential
 def WQ():
@@ -81,6 +81,14 @@ def WQMfunction(x,y):
 #1 dimensional potential
 def potential1d():
     return "4*(x*x*x-1.5*x)^2-x*x*x+x"
+
+def Potential2D():
+    return "2+(4./3)*x^4-2*y^2+y^4+(10./3)*x^2*(y^2-1)"
+
+#y = np.linspace(-1.5,1.5,150)
+#x = np.linspace(-1.5,1.5,150)
+def potential2D(x,y):
+    return 2+4./3.*x*x*x*x-2*y*y+y*y*y*y+10./3.*x*x*(y*y-1)
 
 #-- example plumed input file --#
 

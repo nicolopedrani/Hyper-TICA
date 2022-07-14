@@ -6,14 +6,21 @@ date
 ncore=1
 tprfile=input.sB.tpr
 gmx=`which gmx_mpi`
+script=/home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/Alanine/script/bck.meup.sh
+pin_offset=4
+cpi_state=false
 
 ### optional ###
-nsteps=$[500*1000*100] #last is ns
+ns=4.5
+nsteps=$(echo "500*1000*$ns" | bc | awk '{ printf("%.0f\n",$1) '})
 ntomp=2
 #maxh=1:00 #h:min
 filename=alanine
+restartfile=$filename*.cpt
+checkpointfile=state.cpt
 plumedfile=plumed.dat
 extra_cmd=""
+gpu_id=1
 
 echo gromacs for $nsteps steps
 
@@ -31,12 +38,20 @@ fi
 
 ### commands ###
 #mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh"
-mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps"
-submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
-#submit="time ${mpi_cmd} -pin off"
+
+if ${cpi_state}
+then
+  mpi_cmd="$gmx mdrun -s $tprfile -cpo $checkpointfile -cpi state -noappend -deffnm $filename $plumedfile $ntomp $nsteps"
+else
+  mpi_cmd="$gmx mdrun -s $tprfile -cpo $checkpointfile -deffnm $filename $plumedfile $ntomp $nsteps"
+fi
+
+submit="time mpirun -np $ncore ${mpi_cmd} -pin on -pinoffset $pin_offset -pinstride 1 -gpu_id $gpu_id -reseed 1"
+
 ### execute ###
-../script/./bck.meup.sh -i $outfile
-../script/./bck.meup.sh -i ${filename}* > $outfile
+# vorrei eseguirlo ma mi da problemi con il restart.. 
+#bash ${script} -i $outfile
+#bash ${script} -i ${filename}* > $outfile
 echo -e "\n$submit &>> $outfile"
 eval "$submit &>> $outfile"
 [ -z "$extra_cmd" ] || eval $extra_cmd

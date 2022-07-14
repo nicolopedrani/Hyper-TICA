@@ -39,14 +39,6 @@ print(lags)
 train_sim = None # number of previous simulations to train the NN
 shuffle = False # if shuffle the data between batches
 #-- work in progress --#
-add_new_descriptors = False # if to add new descriptors during simulation:
-# The idea is to add as descriptors also the previous found cvs 
-# Probably this will not improve the performance because the cvs themselves are functions of the descriptors.. But we can give it a try
-# this is not computationally very expensive but not straightforward to implement. 
-# It means to add the relative columns of the previous datasets and hence 
-# evaluate at each iteration the new time lagged couples
-# this implementation can in principle be useful also not to carry all the previous data. In this case it is not necessary to add
-# columns to previous datasets because they are not used
 
 print("###--- PARAMETERS ---###")
 print("Barrier for OPES: ", BARRIER)
@@ -251,9 +243,8 @@ for i in range(1,iterations):
     X = data[descriptors_names].values
     # alternative method to not modify temperature but only rescale the bias
     logweight = data["opes.bias"].to_numpy()-max(data["opes.bias"].to_numpy())
-    # michele suggerisce di non riscalare, ma così rischio di ottenere delle stime non bounded della matrice di correlazione. Per cui riscalo
-    logweight /= np.abs(min(logweight))
     logweight *= sim_parameters["beta"]
+    logweight /= np.abs(min(logweight))
     dt = t[1]-t[0]
     tprime = dt * np.cumsum(np.exp(logweight))
 

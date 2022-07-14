@@ -1,0 +1,71 @@
+No protocol specified
+              :-) GROMACS - gmx mdrun, 2020.6-plumed-2.9.0-dev (-:
+
+                            GROMACS is written by:
+     Emile Apol      Rossen Apostolov      Paul Bauer     Herman J.C. Berendsen
+    Par Bjelkmar      Christian Blau   Viacheslav Bolnykh     Kevin Boyd    
+ Aldert van Buuren   Rudi van Drunen     Anton Feenstra       Alan Gray     
+  Gerrit Groenhof     Anca Hamuraru    Vincent Hindriksen  M. Eric Irrgang  
+  Aleksei Iupinov   Christoph Junghans     Joe Jordan     Dimitrios Karkoulis
+    Peter Kasson        Jiri Kraus      Carsten Kutzner      Per Larsson    
+  Justin A. Lemkul    Viveca Lindahl    Magnus Lundborg     Erik Marklund   
+    Pascal Merz     Pieter Meulenhoff    Teemu Murtola       Szilard Pall   
+    Sander Pronk      Roland Schulz      Michael Shirts    Alexey Shvetsov  
+   Alfons Sijbers     Peter Tieleman      Jon Vincent      Teemu Virolainen 
+ Christian Wennberg    Maarten Wolf      Artem Zhmurov   
+                           and the project leaders:
+        Mark Abraham, Berk Hess, Erik Lindahl, and David van der Spoel
+
+Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+Copyright (c) 2001-2019, The GROMACS development team at
+Uppsala University, Stockholm University and
+the Royal Institute of Technology, Sweden.
+check out http://www.gromacs.org for more information.
+
+GROMACS is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License
+as published by the Free Software Foundation; either version 2.1
+of the License, or (at your option) any later version.
+
+GROMACS:      gmx mdrun, version 2020.6-plumed-2.9.0-dev
+Executable:   /home/npedrani@iit.local/programs/gromacs-2020.6/install/bin/gmx_mpi
+Data prefix:  /home/npedrani@iit.local/programs/gromacs-2020.6/install
+Working dir:  /home/npedrani@iit.local/Desktop/Phd_main_Projects/Hyper-TICA/chignolin/On-The-Fly/Deep-TICA/restart/all_data_unbias/unbias/bias1/bias2/bias3
+Command line:
+  gmx_mpi mdrun -s chignolin.tpr -cpo state.cpt -cpi state -noappend -deffnm chignolin -plumed plumed.dat -ntomp 2 -nsteps 5000000 -pin on -pinoffset 0 -pinstride 1 -gpu_id 1
+
++++ Loading the PLUMED kernel runtime +++
++++ PLUMED_KERNEL="/home/npedrani@iit.local/programs/plumed2-pytorch/src/lib/libplumedKernel.so" +++
++++ Loading the PLUMED kernel runtime +++
++++ PLUMED_KERNEL="/home/npedrani@iit.local/programs/plumed2-pytorch/src/lib/libplumedKernel.so" +++
+No protocol specified
+Reading file chignolin.tpr, VERSION 2018.4 (single precision)
+Note: file tpx version 112, software tpx version 119
+Overriding nsteps with value passed on the command line: 5000000 steps, 1e+04 ps
+Changing nstlist from 10 to 100, rlist from 1 to 1.169
+
+
+1 GPU selected for this run.
+Mapping of GPU IDs to the 2 GPU tasks in the 1 rank on this node:
+  PP:1,PME:1
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PP task will update and constrain coordinates on the CPU
+PME tasks will do all aspects on the GPU
+Using 1 MPI process
+Using 2 OpenMP threads 
+
+
+Overriding thread affinity set outside gmx mdrun
+starting mdrun 'Protein in water'
+20000000 steps,  40000.0 ps (continuing from step 15000000,  30000.0 ps).
+
+Writing final coordinates.
+
+               Core t (s)   Wall t (s)        (%)
+       Time:    16023.908     8011.954      200.0
+                         2h13:31
+                 (ns/day)    (hour/ns)
+Performance:      107.839        0.223
+
+GROMACS reminds you: "You're like them scientists on TV explaining black holes. More you talk, less I get" (Jess Walter)
+

@@ -1,0 +1,6 @@
+#! FIELDS idx_dim1 pot.coeffs index description
+#! SET type LinearBasisSet
+#! SET ndimensions  1
+#! SET ncoeffs_total  5
+#! SET shape_dim1 5
+#!-------------------

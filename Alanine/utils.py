@@ -9,10 +9,10 @@ import matplotlib as mpl
 from scipy.interpolate import griddata
 from scipy import integrate
 
-from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader, tprime_evaluation, find_time_lagged_configurations
+from mlcvs.utils.data import create_time_lagged_dataset, create_time_lagged_dataset_new, FastTensorDataLoader, tprime_evaluation, find_time_lagged_configurations
 from torch.utils.data import Subset,random_split
 from mlcvs.utils.io import load_dataframe
-from mlcvs.tica import DeepTICA_CV
+from mlcvs.tica import DeepTICA_CV, TICA_CV
 from mlcvs.utils.fes import compute_fes
 
 from scipy.optimize import curve_fit
@@ -30,58 +30,6 @@ def execute(command, folder, background=False, print_result=True):
             print(f'Completed: {command}')
     else:
         print(cmd.stderr)
-
-
-def create_time_lagged_dataset(X, t = None, lag_time = 10, logweights = None, tprime = None, interval = None):
-    """
-    Create a dataset of time-lagged configurations. If a set of (log)weights is given the search is performed in the accelerated time.
-
-    Parameters
-    ----------
-    X : array-like
-        input descriptors
-    t : array-like, optional
-        time series, by default np.arange(len(X))
-    lag_time: float, optional
-        lag between configurations, by default = 10        
-    logweights : array-like,optional
-        logweights to evaluate rescaled time as dt' = dt*exp(logweights)
-    tprime : array-like,optional
-        rescaled time estimated from the simulation. If not given 'tprime_evaluation(t,logweights)' is used instead
-    """
-
-    # check if dataframe
-    if type(X) == pd.core.frame.DataFrame:
-        X = X.values
-    if type(t) == pd.core.frame.DataFrame:
-        t = t.values
-
-    # assert
-    assert t.ndim == 1 
-    assert len(X) == len(t)
-
-    # define time if not given
-    if t is None:
-        t = np.arange(0,len(X))
-
-    #define tprime if not given
-    if tprime is None:
-        tprime = tprime_evaluation(t, logweights)
-
-    # find pairs of configurations separated by lag_time
-    data = find_time_lagged_configurations(X, tprime,lag=lag_time)
-    
-    if interval is not None:
-        # covert to a list
-        data = list(data)
-        # assert dimension of interval
-        assert len(interval) == 2
-        # modifies the content of data by slicing
-        for i in range(len(data)):
-            data[i] = data[i][interval[0]:interval[1]]
-
-    #return data
-    return torch.utils.data.TensorDataset(*data)
 
 #-- fitting time auto-correlation function --#
 def f(x,l):

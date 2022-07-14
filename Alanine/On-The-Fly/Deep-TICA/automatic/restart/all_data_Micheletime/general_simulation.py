@@ -32,7 +32,7 @@ Time = 1 # in nanoseconds, time of single simulation
 size = (Time/dt)/STRIDE # total sampled points for each simulation
 restart = True # if restart simulation
 #-- minimum and maximum lag time --#
-min_lag,max_lag = 0.2,1 #if stride is 100, 0.2,5 should be ok
+min_lag,max_lag = 0.2,5 
 n = 5 # how many lag times between min and max lag
 lags = np.linspace(min_lag,max_lag,n) #-- how many batches for the train and valid set of a single simulation
 print(lags)
@@ -109,7 +109,7 @@ train_parameters = {
               'trainsize':0.7, 
               'lrate':1e-3,
               'l2_reg':0.,
-              'num_epochs':200,
+              'num_epochs':400,
               'batchsize': -1, #---> è da fare sul train loder and valid loader
               'es_patience':10,
               'es_consecutive':True,
@@ -250,12 +250,10 @@ for i in range(1,iterations):
     t = data['time'].values
     X = data[descriptors_names].values
     logweight = data["opes.bias"].to_numpy()*sim_parameters["beta"]
-    #logweight -= max(logweight)
+    logweight -= max(logweight)
     dt = t[1]-t[0]
     tprime = dt * np.cumsum(np.exp(logweight))
     
-    tprime = None
-    logweight = None
     # create time lagged dataset with different lag times
     for lag in lags:
         #random split
