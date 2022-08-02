@@ -10,7 +10,7 @@ from scipy import integrate
 #-- import TICA class --#
 from mlcvs.tica import TICA_CV
 
-from mlcvs.utils.data import create_time_lagged_dataset, create_time_lagged_dataset_new, FastTensorDataLoader, tprime_evaluation, find_time_lagged_configurations
+from mlcvs.utils.data import create_time_lagged_dataset, FastTensorDataLoader, tprime_evaluation, find_time_lagged_configurations
 from torch.utils.data import Subset,random_split
 from mlcvs.utils.io import load_dataframe
 from mlcvs.tica import DeepTICA_CV
