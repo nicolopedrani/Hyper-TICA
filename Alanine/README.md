@@ -2,9 +2,10 @@
   
 ## Different simulations  
   
-- `Unbias_B` (starting in basin B) Ho una transizione dopo circa 40ns  
-- `only_psi` simulazione biasando solo lungo psi  
-- `low_biasfactor` cambiando bias factor per OPES e quindi well tempered distribution, biasando lungo psi e phi
-- `metadynamics` metadinamica biasando lungo psi e phi 
-- `multiT` multi thermal con OPES  
-- `Benchmark` dentro **angle** ci sono i risultati relativi a questa simulazione. Ho biasato lungo psi e phi per avere stime corrette delle FES  
+- `Unbias_B`,`Unbias_A`: simulations starting either from basin B or A.   
+- `only_psi`: simulation biasing along psi only    
+- `low_biasfactor`: biasing along both psi a phi but tuning the bias factor parameter for the target well-tempered distribution
+- `metadynamics`: standard metadynamics simulation biasing along both psi and phi 
+- `multiT`: multi thermal with OPES  
+- `Benchmark`: inside **angles** folder there are the results relative to the simulation performed biasing both psi and phi. These results are used to estimate correctly the Free Energy Surface of Alanine Dipeptide  
+- `On The Fly`: Application of the iterative method on the Alanine Dipeptide.  

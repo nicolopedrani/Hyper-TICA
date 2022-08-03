@@ -6,7 +6,7 @@ From theory we know that the TICA method is able to estimate (with a certain pre
 If the simulation is shorter than the timescale associated to a transition between different metastable states, then the system remains stuck in the starting macroscopic basin. The TICA method is a data driven approach, hence in this scenario it will be not able to detect the slow modes associated to the macroscopic transitions, but rather it will approximate the *fast* modes of the system (slow modes inside the starting basin) relative to the starting basin.  
 We assume that accelerating these *fast* modes the system is able to explore wider the local minima and eventually escape from it in a finite amount of time. When a transition occur the hierarchy of the slow modes changes, and the slowest motion becomes that one associated to the macroscopic transition.  
 In pratice we apply in a iterative manner the TICA method, every time to the samples obtained from the previous simulation.  
-**Problem**: at every new iteration we apply to the system a different bias potential, which adds an external force in the direction of the new found cvs from the previous simulation. And at each iteration we obtain a new set of points distributed according to a new boltzmann distribution, different from the unbiased one. This could lead to issues because we want to estimate the1 *unbiased slow modes* of the system, so in principle we must reweight the samples.  
+**Problem**: at every new iteration we apply to the system a different bias potential, which adds an external force in the direction of the new found cvs from the previous simulation. And at each iteration we obtain a new set of points distributed according to a new boltzmann distribution, different from the unbiased one. This could lead to issues because we want to estimate the *unbiased slow modes* of the system, so in principle we must reweight the samples.  
 From a biased simulation it is always possible to recover unbiased estimate of static properties, and only rarely it is possible to recover the dynamic properties of the system such as the time correlation functions. Unfortunately TICA method requires the computation of these dynamic properties, in particular it requires the evalution of the time correlation function of the descriptors. So far we have used the algorithm implemented here [https://doi.org/10.1021/acs.jctc.8b00231], which exploits the concept of rescaled time introduced by Voter. When Voter first introduced this quantity he assumed certain hypothesis:  
 -   deposited static positive bias
 -   bias potential deposited only in the starting basin, and not on the transition state and further.  
@@ -20,7 +20,7 @@ This approach obviously requires more Molecular Dynamics steps to be performed f
 -   find a more robust method for the evaluation of the time correlation function
 -   change iterative approach. For example one can combine the autoencoders with the TICA method.    
   
-### Folder
+### Folders
 There will be different folders:  
 -   **1D_Model**: One dimensional model to test Deep-TICA performance
 -   **Potential2D**: bi-dimensional Toy Model potential
